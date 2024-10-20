@@ -1,0 +1,19 @@
+## Referências
+
+Brasil. Ministério da Saúde. Secretaria de Ciência, Tecnologia, Inovação e Complexo da Saúde. Departamento de Ciência e Tecnologia. 2023. Avaliação de impacto das políticas de saúde: um guia para o SUS. Brasília: Ministério da Saúde. Disponível em: <http://bvsms.saude.gov.br/bvs/publicacoes/avaliacao_impacto_politicas_saude_guia_sus.pdf>. Acesso em: 09 set. 2024.
+
+Brasil. Ministério da Saúde. 2024a. Dengue. Saúde de A a Z. Brasília: Ministério da Saúde. Disponível em: <https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue>. Acesso em: 06 set. 2024.
+
+Brasil. Ministério da Saúde. Departamento de Informática do Sistema Único de Saúde [DATASUS]. 2024b. Sistema de Notificações de Agravos (SINAN). Brasília: Ministério da Saúde. Disponível em: <https://datasus.saude.gov.br/transferencia-de-arquivos/>. Acesso em: 06 set. 2024.
+
+Instituto Brasileiro de Geografia e Estatística [IBGE]. 2023. Censo Demográfico. Rio de Janeiro: IBGE. Disponível em: <https://www.ibge.gov.br/estatisticas/sociais/trabalho/22827-censo-demografico-2022.html>. Acesso em: 09 set. 2024.
+
+Instituto Brasileiro de Geografia e Estatística [IBGE]. 2024. Estimativas da População. Rio de Janeiro: IBGE. Disponível em: <https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html>. Acesso em: 09. set. 2024.
+
+LUZ, Paula M. et al. 2008. Time series analysis of dengue incidence in Rio de Janeiro, Brasil. American Journal of Tropical Medicine and Hygiene, v. 79, n. 6, p. 933-939. Disponível em: <https://www.arca.fiocruz.br/handle/icict/30488>. Acesso em: 18 out. 2024.
+
+Organização Mundial da Saúde [OMS]. 2024. Dengue and severe dengue. Disponível em: <https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue>. Acesso em: 06 set. 2024.
+
+VIANA, D.V.; IGNOTTI, E. 2013. A ocorrência da dengue e variações meteorológicas no Brasil: revisão sistemática. Revista Brasileira de Epidemiologia, 16(2), p. 240-256, 2013. Disponível em: <https://www.scielo.br/j/rbepid/a/TcbcTTkMKgRTnQySbSnpsCh/>. Acesso em: 09 set. 2024.
+
+SKALINSKI, Lacita Menezes; COSTA, Maria da Conceição Nascimento; TEIXEIRA, Maria da Glória Lima. 2019. Contribuições da análise espacial para a compreensão da dinâmica de transmissão da dengue: revisão integrativa. Journal of Health & Biological Sciences, 7(1) (Jan-Mar), p. 53-63. Disponível em: <https://periodicos.unichristus.edu.br/jhbs/article/view/2115>. Acesso em: 18 out. 2024.

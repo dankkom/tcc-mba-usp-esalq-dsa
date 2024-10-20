@@ -1,0 +1,14 @@
+## Cronograma de atividades
+
+Gantt do projeto
+
+| Atividades planejadas        | Início     | Fim        |
+|------------------------------|------------|------------|
+| Coleta de dados              | 01/11/2024 | 30/11/2024 |
+| Pré-processamento            | 01/11/2024 | 15/12/2024 |
+| Visualização dos dados       | 01/12/2024 | 31/12/2024 |
+| Interpretação dos resultados | 15/12/2024 | 15/01/2025 |
+| Redação do relatório final   | 15/12/2024 | 28/02/2025 |
+| Revisão                      | 15/02/2025 | 15/03/2025 |
+| Apresentação                 | 01/03/2025 | 15/03/2025 |
+| Entrega final                | 15/03/2025 | 31/03/2025 |

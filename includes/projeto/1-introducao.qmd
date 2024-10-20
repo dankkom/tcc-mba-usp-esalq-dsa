@@ -1,0 +1,13 @@
+## Introdução
+
+A dengue, uma doença viral transmitida pelo mosquito Aedes aegypti, continua a ser um dos maiores desafios para a saúde pública no Brasil. Com a sua capacidade de causar surtos epidêmicos e afetar centenas de milhares de pessoas anualmente, a dengue impõe uma carga significativa sobre os sistemas de saúde e a economia do país. No primeiro semestre de 2024, o Brasil enfrentou uma epidemia de casos de dengue sem precedentes, destacando ainda mais a necessidade de uma análise detalhada e de estratégias eficazes de controle e prevenção.
+
+De acordo com a Organização Mundial da Saúde (OMS, 2024), a dengue é a doença transmitida por vetores de crescimento mais rápido no mundo, com 500 mil casos reportados em 2000 para cerca de 5,2 milhões, reportados em 2019.
+
+No entanto, existe uma severa subnotificação de casos, pois a maioria é assintomática e/ou auto-tratada, e alguns são mal-diagnosticados. Estima-se que, anualmente, incidem de 100 a 400 milhões de casos.
+
+No Brasil, a doença é endêmica, com esporádicas epidemias, em todas as regiões do país, sendo responsável por um elevado número de hospitalizações e óbitos (BRASIL, 2024a; VIANA, IGNOTTI, 2013).
+
+Fatores climáticos, como temperatura e precipitação, desempenham um papel crucial na dinâmica da transmissão da dengue. A temperatura elevada favorece a reprodução do mosquito vetor, enquanto a precipitação pode criar criadouros para o mosquito. Além disso, a urbanização desordenada e a falta de saneamento básico são fatores que contribuem para a proliferação do Aedes aegypti e, consequentemente, para o aumento da transmissão da dengue (BRASIL, 2024a; SKALINSKI, COSTA, TEIXEIRA, 2019).
+
+A análise dos dados de notificações de dengue permite identificar áreas e períodos de maior incidência, bem como possíveis correlações com variáveis climáticas. Estudos anteriores indicam que fatores climáticos desempenham um papel crucial na dinâmica da transmissão da dengue, influenciando tanto a reprodução do mosquito vetor quanto a propagação do vírus (VIANA, IGNOTTI, 2013; SKALINSKI, COSTA, TEIXEIRA, 2019). Além disso, visualizações de dados interativas facilitam a interpretação dos dados por parte de gestores de saúde e outras partes interessadas, promovendo uma resposta mais rápida e eficaz aos surtos de dengue.
