@@ -13,14 +13,14 @@ Curso: MBA em Data Science e Analytics
 
 Título: Análise e Visualização da Epidemia de Dengue no Brasil em 2023-2024
 
-{{< include includes/projeto/1-introducao.qmd >}}
+{{< include includes/0-projeto/1-introducao.qmd >}}
 
-{{< include includes/projeto/2-objetivo.qmd >}}
+{{< include includes/0-projeto/2-objetivo.qmd >}}
 
-{{< include includes/projeto/3-material-e-metodos.qmd >}}
+{{< include includes/0-projeto/3-material-e-metodos.qmd >}}
 
-{{< include includes/projeto/4-resultados-esperados.qmd >}}
+{{< include includes/0-projeto/4-resultados-esperados.qmd >}}
 
-{{< include includes/projeto/5-cronograma-de-atividades.qmd >}}
+{{< include includes/0-projeto/5-cronograma-de-atividades.qmd >}}
 
-{{< include includes/projeto/referencias.qmd >}}
+{{< include includes/0-projeto/referencias.qmd >}}

@@ -1,0 +1,30 @@
+---
+title: "TCC"
+author: "Daniel Kiyoyudi Komesu"
+date: "2025-03-01"
+format: pdf
+---
+
+## Resumo
+
+## Abstract
+
+## 1. Introdução
+
+{{< include includes/2-tcc/1-introducao.qmd >}}
+
+## 2. Material e métodos
+
+{{< include includes/2-tcc/2-material-e-metodos.qmd >}}
+
+## 3. Resultados e discussão
+
+{{< include includes/2-tcc/3-resultados-e-discussao.qmd >}}
+
+## 4. Considerações finais
+
+{{< include includes/2-tcc/4-consideracoes-finais.qmd >}}
+
+## Referências
+
+{{< include includes/2-tcc/referencias.qmd >}}
