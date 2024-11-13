@@ -18,8 +18,8 @@ library(tibble)
 library(microdatasus)
 
 
-data_dir <- "C:\\data\\datasus"
-dest_dir <- "C:\\data\\datasus\\parquet"
+data_dir <- "data/datasus"
+dest_dir <- "data/datasus/csv"
 dir_create(dest_dir)
 
 
@@ -31,17 +31,22 @@ main <- function() {
     glob = "*.dbc"
   )
 
-  dados <- tibble()
   for (file in files) {
+    # dest_filepath <- path(glue::glue("{basename(dirname(file))}.parquet"))
+    dest_filepath <- path(dest_dir, glue::glue("{basename(dirname(file))}.csv"))
+    if (file_exists(dest_filepath)) {
+      print(paste("Arquivo já processado:", file))
+      next
+    }
     print(paste("Lendo arquivo:", file))
     # Lendo arquivo DBC
-    d <- read.dbc(file, as.is = TRUE) |> process_sinan_dengue() |> as_tibble()
-    dados <- bind_rows(dados, d)
-    rm(d)  # Liberando memória
+    read.dbc(file, as.is = TRUE) |>
+      process_sinan_dengue() |>
+      as_tibble() |>
+      # write_parquet(dest_filepath)
+      readr::write_csv(dest_filepath)
     gc()  # Coleta de lixo
   }
-
-  write_parquet(dados, path(dest_dir, "sinan-deng_2020-2024.parquet"))
 }
 
 main()
