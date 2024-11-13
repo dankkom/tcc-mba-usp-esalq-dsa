@@ -13,7 +13,7 @@ from datasus_fetcher.slicer import Slicer
 
 def main():
     # Definindo o diretório de saída
-    output_dir = Path("C:\\data\\datasus")
+    output_dir = Path("data", "datasus")
 
     # Coletando os dados do SINAN Dengue
     fetcher.download_data(
