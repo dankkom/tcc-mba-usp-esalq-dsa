@@ -6,12 +6,15 @@ Para instalar o pacote datasus-fetcher, execute o comando abaixo no terminal:
 
 """
 
+import logging
 from pathlib import Path
 from datasus_fetcher import fetcher
 from datasus_fetcher.slicer import Slicer
 
 
 def main():
+    logging.basicConfig(level=logging.DEBUG)
+
     # Definindo o diretório de saída
     output_dir = Path("data", "datasus")
 
