@@ -9,6 +9,60 @@ F_MINUTOS = 1 / (60 * 24 * 365)
 F_HORAS = 1 / (24 * 365)
 F_DIAS = 1 / 365
 F_MESES = 1 / 12
+UF = {
+    "11": "RO",
+    "12": "AC",
+    "13": "AM",
+    "14": "RR",
+    "15": "PA",
+    "16": "AP",
+    "17": "TO",
+    "21": "MA",
+    "22": "PI",
+    "23": "CE",
+    "24": "RN",
+    "25": "PB",
+    "26": "PE",
+    "27": "AL",
+    "28": "SE",
+    "29": "BA",
+    "31": "MG",
+    "32": "ES",
+    "33": "RJ",
+    "35": "SP",
+    "41": "PR",
+    "42": "SC",
+    "43": "RS",
+    "50": "MS",
+    "51": "MT",
+    "52": "GO",
+    "53": "DF",
+}
+COR_RACA = {
+    "": "Ignorado",
+    "1": "Branca",
+    "2": "Preta",
+    "4": "Parda",
+    "5": "Indígena",
+    "9": "Ignorado",
+}
+ESCOLARIDADE = {
+    "1": "1ª a 4ª série incompleta do EF",
+    "2": "4ª série completa do EF (antigo 1º grau)",
+    "3": "5ª a 8ª série incompleta do EF (antigo ginásio ou 1º grau)",
+    "4": "Ensino fundamental completo (antigo ginásio ou 1º grau)",
+    "5": "Ensino médio incompleto (antigo colegial ou 2º grau)",
+    "6": "Ensino médio completo (antigo colegial ou 2º grau)",
+    "7": "Educação superior incompleta",
+    "8": "Educação superior completa",
+    "10": "Não se aplica",
+}
+EVOLUCAO = {
+    "1": "Cura",
+    "2": "Óbito por dengue",
+    "3": "Óbito por outras causas",
+    "4": "Óbito em investigação",
+}
 
 
 def convert_idade(x: str) -> float:
@@ -38,6 +92,31 @@ def convert_idade(x: str) -> float:
     return idade
 
 
+def convert_sexo(x: str) -> str:
+    sexo = "Ignorado"
+    if x == "M":
+        sexo = "Masculino"
+    elif x == "F":
+        sexo = "Feminino"
+    return sexo
+
+
+def convert_raca(x: str) -> str:
+    return COR_RACA.get(x, "Ignorado")
+
+
+def convert_uf(x: str) -> str:
+    return UF.get(x)
+
+
+def convert_escolaridade(x: str) -> str:
+    return ESCOLARIDADE.get(x, "Ignorado")
+
+
+def convert_evolucao(x: str) -> str:
+    return EVOLUCAO.get(x, "Ignorado")
+
+
 def main():
     data_dir = Path("data/datasus/parquet")
 
@@ -48,25 +127,32 @@ def main():
         "DT_NOTIFIC",
         "SEM_NOT",
         "NU_ANO",
-        "SG_UF_NOT",
+        "SG_UF_NOT",  # Convert using function 'convert_uf'
         "ID_MUNICIP",
-        "NU_IDADE_N",
-        "CS_SEXO",
-        "CS_RACA",
-        "CS_ESCOL_N",
-        "SG_UF",
+        "NU_IDADE_N",  # Convert using function 'convert_idade'
+        "CS_SEXO",  # Convert using function 'convert_sexo'
+        "CS_RACA",  # Convert using function 'convert_raca'
+        "CS_ESCOL_N",  # Convert using function 'convert_escolaridade'
+        "SG_UF",  # Convert using function 'convert_uf'
         "ID_MN_RESI",
-        "EVOLUCAO",
+        "EVOLUCAO",  # Convert using function 'convert_evolucao'
         "DT_OBITO",
     ]
     sinan_deng = pd.DataFrame()
     for filepath in data_dir.iterdir():
         print(filepath)
         d = pd.read_parquet(filepath, columns=columns)
+        d = d[d["DT_NOTIFIC"] >= pd.to_datetime("2020-01-01").date()]
         d["NU_IDADE_N"] = d["NU_IDADE_N"].astype(str)
-        d["idade"] = d["NU_IDADE_N"].apply(convert_idade)
-        print(d.idade.min(), d.idade.max(), d.idade.mean(), d.idade.median())
+        d["NU_IDADE_N"] = d["NU_IDADE_N"].apply(convert_idade)
+        d["CS_SEXO"] = d["CS_SEXO"].apply(convert_sexo)
+        d["CS_RACA"] = d["CS_RACA"].apply(convert_raca)
+        d["SG_UF"] = d["SG_UF"].apply(convert_uf)
+        d["SG_UF_NOT"] = d["SG_UF_NOT"].apply(convert_uf)
+        d["CS_ESCOL_N"] = d["CS_ESCOL_N"].apply(convert_escolaridade)
+        d["EVOLUCAO"] = d["EVOLUCAO"].apply(convert_evolucao)
         sinan_deng = pd.concat((sinan_deng, d), ignore_index=True)
+
     sinan_deng.to_csv("data/sinan-dengue.csv", index=False)
 
 
