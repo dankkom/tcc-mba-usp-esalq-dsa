@@ -46,16 +46,17 @@ COR_RACA = {
     "5": "Indígena",
     "9": "Ignorado",
 }
-ESCOLARIDADE = {
-    "1": "1ª a 4ª série incompleta do EF",
-    "2": "4ª série completa do EF (antigo 1º grau)",
-    "3": "5ª a 8ª série incompleta do EF (antigo ginásio ou 1º grau)",
-    "4": "Ensino fundamental completo (antigo ginásio ou 1º grau)",
-    "5": "Ensino médio incompleto (antigo colegial ou 2º grau)",
-    "6": "Ensino médio completo (antigo colegial ou 2º grau)",
-    "7": "Educação superior incompleta",
-    "8": "Educação superior completa",
-    "10": "Não se aplica",
+CLASSIFICACAO_FINAL = {
+    "5": "Descartado",
+    "10": "Dengue",
+    "11": "Dengue com sinais de alarme",
+    "12": "Dengue grave",
+    "13": "Chikungunya",
+}
+CRITERIO = {
+    "1": "Laboratório",
+    "2": "Clínico epidemiológico",
+    "3": "Em investigação",
 }
 EVOLUCAO = {
     "1": "Cura",
@@ -109,8 +110,12 @@ def convert_uf(x: str) -> str:
     return UF.get(x)
 
 
-def convert_escolaridade(x: str) -> str:
-    return ESCOLARIDADE.get(x, "Ignorado")
+def convert_classificacao_final(x: str) -> str:
+    return CLASSIFICACAO_FINAL.get(x, "Ignorado")
+
+
+def convert_criterio(x: str) -> str:
+    return CRITERIO.get(x, "Ignorado")
 
 
 def convert_evolucao(x: str) -> str:
@@ -132,9 +137,10 @@ def main():
         "NU_IDADE_N",  # Convert using function 'convert_idade'
         "CS_SEXO",  # Convert using function 'convert_sexo'
         "CS_RACA",  # Convert using function 'convert_raca'
-        "CS_ESCOL_N",  # Convert using function 'convert_escolaridade'
         "SG_UF",  # Convert using function 'convert_uf'
         "ID_MN_RESI",
+        "CLASSI_FIN",  # Convert using function 'convert_classificacao_final'
+        "CRITERIO",  # Convert using function 'convert_criterio'
         "EVOLUCAO",  # Convert using function 'convert_evolucao'
         "DT_OBITO",
     ]
@@ -149,7 +155,8 @@ def main():
         d["CS_RACA"] = d["CS_RACA"].apply(convert_raca)
         d["SG_UF"] = d["SG_UF"].apply(convert_uf)
         d["SG_UF_NOT"] = d["SG_UF_NOT"].apply(convert_uf)
-        d["CS_ESCOL_N"] = d["CS_ESCOL_N"].apply(convert_escolaridade)
+        d["CLASSI_FIN"] = d["CLASSI_FIN"].apply(convert_classificacao_final)
+        d["CRITERIO"] = d["CRITERIO"].apply(convert_criterio)
         d["EVOLUCAO"] = d["EVOLUCAO"].apply(convert_evolucao)
         sinan_deng = pd.concat((sinan_deng, d), ignore_index=True)
 
