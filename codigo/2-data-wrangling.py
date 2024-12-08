@@ -64,6 +64,22 @@ EVOLUCAO = {
     "3": "Óbito por outras causas",
     "4": "Óbito em investigação",
 }
+TP_NOT = {
+    "1": "Negativa",
+    "2": "Individual",
+    "3": "Surto",
+    "4": "Agregado",
+}
+SOROTIPO = {
+    "1": "DEN 1",
+    "2": "DEN 2",
+    "3": "DEN 3",
+    "4": "DEN 4",
+}
+
+
+def convert_tp_not(x: str) -> str:
+    return TP_NOT.get(x, "Ignorado")
 
 
 def convert_idade(x: str) -> float:
@@ -122,13 +138,16 @@ def convert_evolucao(x: str) -> str:
     return EVOLUCAO.get(x, "Ignorado")
 
 
+def convert_sorotipo(x: str) -> str:
+    return SOROTIPO.get(x, "Ignorado")
+
+
 def main():
     data_dir = Path("data/datasus/parquet")
 
     # Carregando os dados do SINAN Dengue
     columns = [
-        "TP_NOT",
-        "ID_AGRAVO",
+        "TP_NOT",  # Convert using function 'convert_tp_not'
         "DT_NOTIFIC",
         "SEM_NOT",
         "NU_ANO",
@@ -143,11 +162,14 @@ def main():
         "CRITERIO",  # Convert using function 'convert_criterio'
         "EVOLUCAO",  # Convert using function 'convert_evolucao'
         "DT_OBITO",
+        "DT_ENCERRA",
+        "SOROTIPO",  # Convert using function 'convert_sorotipo'
     ]
     sinan_deng = pd.DataFrame()
-    for filepath in data_dir.iterdir():
+    for filepath in sorted(data_dir.glob("*.parquet")):
         print(filepath)
         d = pd.read_parquet(filepath, columns=columns)
+        d["TP_NOT"] = d["TP_NOT"].apply(convert_tp_not)
         d = d[d["DT_NOTIFIC"] >= pd.to_datetime("2020-01-01").date()]
         d["NU_IDADE_N"] = d["NU_IDADE_N"].astype(str)
         d["NU_IDADE_N"] = d["NU_IDADE_N"].apply(convert_idade)
@@ -158,6 +180,7 @@ def main():
         d["CLASSI_FIN"] = d["CLASSI_FIN"].apply(convert_classificacao_final)
         d["CRITERIO"] = d["CRITERIO"].apply(convert_criterio)
         d["EVOLUCAO"] = d["EVOLUCAO"].apply(convert_evolucao)
+        d["SOROTIPO"] = d["SOROTIPO"].apply(convert_sorotipo)
         sinan_deng = pd.concat((sinan_deng, d), ignore_index=True)
 
     sinan_deng.to_csv("data/sinan-dengue.csv", index=False)
