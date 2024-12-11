@@ -1,5 +1,5 @@
 ---
-title: Análise e Visualização da Epidemia de Dengue no Brasil em 2023-2024
+title: Análise e Visualização de Dados da Epidemia de Dengue no Brasil em 2023-2024
 author: Daniel Kiyoyudi Komesu
 date: now
 format: pdf
@@ -11,7 +11,7 @@ Orientador(a): Adriano de Freitas Fernandes
 
 Curso: MBA em Data Science e Analytics
 
-Título: Análise e Visualização da Epidemia de Dengue no Brasil em 2023-2024
+Título: Análise e Visualização de Dados da Epidemia de Dengue no Brasil em 2023-2024
 
 {{< include includes/0-projeto/1-introducao.qmd >}}
 
