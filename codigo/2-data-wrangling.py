@@ -64,22 +64,12 @@ EVOLUCAO = {
     "3": "Óbito por outras causas",
     "4": "Óbito em investigação",
 }
-TP_NOT = {
-    "1": "Negativa",
-    "2": "Individual",
-    "3": "Surto",
-    "4": "Agregado",
-}
 SOROTIPO = {
     "1": "DEN 1",
     "2": "DEN 2",
     "3": "DEN 3",
     "4": "DEN 4",
 }
-
-
-def convert_tp_not(x: str) -> str:
-    return TP_NOT.get(x, "Ignorado")
 
 
 def convert_idade(x: str) -> float:
@@ -147,7 +137,6 @@ def main():
 
     # Carregando os dados do SINAN Dengue
     columns = [
-        "TP_NOT",  # Convert using function 'convert_tp_not'
         "DT_NOTIFIC",
         "SEM_NOT",
         "NU_ANO",
@@ -169,7 +158,6 @@ def main():
     for filepath in sorted(data_dir.glob("*.parquet")):
         print(filepath)
         d = pd.read_parquet(filepath, columns=columns)
-        d["TP_NOT"] = d["TP_NOT"].apply(convert_tp_not)
         d = d[d["DT_NOTIFIC"] >= pd.to_datetime("2020-01-01").date()]
         d["NU_IDADE_N"] = d["NU_IDADE_N"].astype(str)
         d["NU_IDADE_N"] = d["NU_IDADE_N"].apply(convert_idade)
