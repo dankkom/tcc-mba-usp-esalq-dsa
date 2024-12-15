@@ -87,6 +87,7 @@ def main():
         )
     )
     pop_mun_fcst.to_csv("data/populacao-municipios.csv", index=False)
+    pop_mun_fcst.to_parquet("data/populacao-municipios.parquet")
 
 
 if __name__ == "__main__":

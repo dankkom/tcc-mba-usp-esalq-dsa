@@ -172,6 +172,7 @@ def main():
         sinan_deng = pd.concat((sinan_deng, d), ignore_index=True)
 
     sinan_deng.to_csv("data/sinan-dengue.csv", index=False)
+    sinan_deng.to_parquet("data/sinan-dengue.parquet")
 
 
 if __name__ == "__main__":
