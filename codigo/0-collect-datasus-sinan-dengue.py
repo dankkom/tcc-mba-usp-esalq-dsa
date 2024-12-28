@@ -23,7 +23,7 @@ def main():
         datasets=["sinan-deng", "sinan-deng-preliminar"],
         destdir=output_dir,
         threads=1,
-        slicer=Slicer(start_time="2020", end_time="2024"),
+        slicer=Slicer(start_time="2009", end_time="2024"),
         callback=print,
     )
 
