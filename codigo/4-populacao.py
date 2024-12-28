@@ -9,8 +9,11 @@ https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html
 """
 
 import pandas as pd
+import warnings
 from statsmodels.tsa.holtwinters import ExponentialSmoothing, Holt
 from tqdm import tqdm
+
+warnings.filterwarnings("ignore")
 
 
 def load_municipality_population():
@@ -41,7 +44,6 @@ def interpolate_population(pop_mun, method="akima"):
 
 
 def make_exponential_smoothing_forecast(series, horizon):
-    print("Making exponential smoothing forecast in", series.name)
     return (
         ExponentialSmoothing(series, trend="mul", seasonal=None, damped_trend=True)
         .fit()
@@ -50,20 +52,20 @@ def make_exponential_smoothing_forecast(series, horizon):
 
 
 def make_holt_forecast(series, horizon):
-    print("Making Holt forecast in", series.name)
     return Holt(series, exponential=True, damped_trend=True).fit().forecast(horizon)
 
 
 def main():
     pop_mun = load_municipality_population()
     pop_mun_interp = interpolate_population(
-        pop_mun.loc[["2019-07-01", "2020-07-01", "2021-07-01", "2024-07-01"]],
+        pop_mun.loc[pop_mun.index.year != 2022],
         method="akima",
     )
 
     # Make projections for each municipality
     horizon = 183
     pop_mun_fcst_wide = pd.DataFrame()
+    print("Forecasting population for 2024-12-31")
     for column in tqdm(pop_mun_interp.columns):
         series = pop_mun_interp[column]
         forecast = make_exponential_smoothing_forecast(series, horizon)
