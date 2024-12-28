@@ -6,12 +6,32 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import numpy as np
 import warnings
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 warnings.filterwarnings("ignore")
 
 
 def pseudolog(x):
     return np.sign(x) * np.log1p(abs(x))
+
+
+def plot_mapa_coropletico(br_uf, dengue_data, ax, ano):
+    data = dengue_data[dengue_data["ano"] == ano]
+    data["pseudolog_incidencia"] = pseudolog(data.incidencia)
+    divider = make_axes_locatable(ax)
+    cax = divider.append_axes("bottom", size="5%", pad=0.1)
+    br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+    data.plot(
+        column="pseudolog_incidencia",
+        cmap="GnBu",
+        ax=ax,
+        legend=True,
+        cax=cax,
+        legend_kwds={
+            "label": f"Pseudo-Logaritmo da Taxa de Incidência de Dengue em {ano}",
+            "orientation": "horizontal",
+        },
+    )
 
 
 def create_legend(ax, color, bins):
@@ -80,7 +100,9 @@ def main():
     # Dados geográficos dos municípios
     br_mun_filepath = data_dir / "br_mun.gpkg"
     br_mun = gpd.read_file(br_mun_filepath, columns=["id_municipio_6"])
-    br_mun.geometry = br_mun.centroid
+
+    br_mun_p = br_mun.copy()
+    br_mun_p.geometry = br_mun_p.centroid
 
     # Dados geográficos dos estados
     br_uf_filepath = data_dir / "br_uf.json"
@@ -103,7 +125,7 @@ def main():
     for ano in dengue_populacao_ano["ano"].unique():
         print("Plotando mapa para o ano", ano)
         dengue_populacao_br_mun = process_geo_data_year(
-            geo=br_mun,
+            geo=br_mun_p,
             data=dengue_populacao_ano,
             ano=ano,
         )
@@ -117,6 +139,25 @@ def main():
         plt.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}.png", dpi=300)
+        plt.close(f)
+
+    # Mapas coropléticos
+    for ano in dengue_populacao_ano["ano"].unique():
+        print("Plotando mapa coroplético para o ano", ano)
+        dengue_populacao_br_mun = process_geo_data_year(
+            geo=br_mun,
+            data=dengue_populacao_ano,
+            ano=ano,
+        )
+
+        f, ax = plt.subplots()
+        f.set_size_inches(12, 12)
+
+        plot_mapa_coropletico(br_uf, dengue_populacao_br_mun, ax, ano)
+
+        plt.axis("off")
+        plt.tight_layout()
+        plt.savefig(dest_plots_dir / f"{ano}-coro.png", dpi=300)
         plt.close(f)
 
 
