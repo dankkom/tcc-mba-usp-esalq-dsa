@@ -15,88 +15,6 @@ def pseudolog(x):
     return np.sign(x) * np.log1p(abs(x))
 
 
-def plot_mapa_hexbin(
-    br_uf,
-    dengue_data,
-    ax,
-    column="notificacoes",
-    cmap="GnBu",
-    gridsize=100,
-    bins="log",
-    alpha=0.7,
-):
-    hb = ax.hexbin(
-        dengue_data.geometry.x,
-        dengue_data.geometry.y,
-        C=dengue_data[column],
-        gridsize=gridsize,
-        bins=bins,
-        cmap=cmap,
-        alpha=alpha,
-        mincnt=1,
-        reduce_C_function=np.sum,
-    )
-    br_uf.plot(ax=ax, facecolor="none", edgecolor="#d0d0d0", linewidth=1)
-
-
-def plot_mapa_coropletico(br_uf, dengue_data, ax, ano):
-    data = dengue_data[dengue_data["ano"] == ano]
-    data["pseudolog_incidencia"] = pseudolog(data.incidencia)
-    divider = make_axes_locatable(ax)
-    cax = divider.append_axes("bottom", size="5%", pad=0.1)
-    br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
-    data.plot(
-        column="pseudolog_incidencia",
-        cmap="GnBu",
-        ax=ax,
-        legend=True,
-        cax=cax,
-        legend_kwds={
-            "label": f"Pseudo-Logaritmo da Taxa de Incidência de Dengue em {ano}",
-            "orientation": "horizontal",
-        },
-    )
-
-
-def create_legend(ax, color, bins):
-    # Legenda de bolhas
-    # Adaptado de https://stackoverflow.com/a/73354795
-    # create second legend
-    ax.add_artist(
-        ax.legend(
-            handles=[
-                mlines.Line2D(
-                    [],
-                    [],
-                    color=color,
-                    lw=0,
-                    marker="o",
-                    markersize=np.sqrt(b),
-                    label=f"{b} notificações/100 mil habitantes",
-                )
-                for i, b in enumerate(bins)
-            ],
-            loc=4,
-            fontsize=16,
-        )
-    )
-
-
-def plot_mapa(br_uf, dengue_data, ax, color, alpha):
-    br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
-    dengue_data.plot(
-        markersize="incidencia",
-        color=color,
-        edgecolor="none",
-        alpha=alpha,
-        ax=ax,
-    )
-
-    create_legend(ax, color, bins=np.array([100, 500, 1_000]))
-
-    return ax
-
-
 def process_geo_data_year(geo, data, ano: int):
     merged_data = geo.merge(
         data[data["ano"] == ano],
@@ -107,7 +25,8 @@ def process_geo_data_year(geo, data, ano: int):
         merged_data["populacao_estimada"] / 100_000
     )
     # Fator de escalonamento para melhor visualização
-    merged_data["incidencia"] = merged_data["incidencia"] / 60
+    merged_data["incidencia"] = np.sqrt(merged_data["incidencia"])
+    merged_data["pseudolog_incidencia"] = pseudolog(merged_data["incidencia"])
     return merged_data
 
 
@@ -147,55 +66,146 @@ def main():
 
     # Mapas
     for ano in dengue_populacao_ano["ano"].unique():
-        print("Plotando mapa para o ano", ano)
         dengue_populacao_br_mun = process_geo_data_year(
             geo=br_mun_p,
             data=dengue_populacao_ano,
             ano=ano,
         )
 
+        # Plot mapa points
+        print("Plotando mapa points para o ano", ano)
         f, ax = plt.subplots()
         f.set_size_inches(12, 12)
-
-        # Plot mapa
-        ax = plot_mapa(br_uf, dengue_populacao_br_mun, ax, color, alpha)
-
+        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        dengue_populacao_br_mun.plot(
+            markersize="incidencia",
+            color="red",
+            edgecolor="none",
+            alpha=alpha,
+            ax=ax,
+        )
+        # Legenda de bolhas
+        # Adaptado de https://stackoverflow.com/a/73354795
+        bins = np.array([10, 50, 100, 500])
+        ax.add_artist(
+            ax.legend(
+                handles=[
+                    mlines.Line2D(
+                        [],
+                        [],
+                        color=color,
+                        lw=0,
+                        marker="o",
+                        markersize=np.sqrt(b),
+                        label=f"{b} notificações/100 mil habitantes",
+                    )
+                    for i, b in enumerate(bins)
+                ],
+                loc=4,
+                fontsize=16,
+            )
+        )
         plt.axis("off")
         plt.tight_layout()
-        plt.savefig(dest_plots_dir / f"{ano}.png", dpi=300)
+        plt.savefig(dest_plots_dir / f"{ano}-points.png", dpi=300)
         plt.close(f)
 
-        # Mapa HEXBIN
+        # Plot mapa HEXBIN
         print("Plotando mapa HEXBIN para o ano", ano)
-
         f, ax = plt.subplots()
         f.set_size_inches(12, 12)
-
-        # Plot mapa HEXBIN
-        ax = plot_mapa_hexbin(br_uf, dengue_populacao_br_mun, ax)
-
+        hb = ax.hexbin(
+            dengue_populacao_br_mun.geometry.x,
+            dengue_populacao_br_mun.geometry.y,
+            C=dengue_populacao_br_mun["incidencia"],
+            gridsize=100,
+            bins="log",
+            cmap="GnBu",
+            alpha=1,
+            mincnt=1,
+            reduce_C_function=np.mean,
+        )
+        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.5)
         plt.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-hexbin.png", dpi=300)
         plt.close(f)
 
+        # Plot mapa HEXBIN pseudolog
+        print("Plotando mapa HEXBIN pseudolog para o ano", ano)
+        f, ax = plt.subplots()
+        f.set_size_inches(12, 12)
+        hb = ax.hexbin(
+            dengue_populacao_br_mun.geometry.x,
+            dengue_populacao_br_mun.geometry.y,
+            C=dengue_populacao_br_mun["pseudolog_incidencia"],
+            gridsize=100,
+            bins="log",
+            cmap="GnBu",
+            alpha=1,
+            mincnt=1,
+            reduce_C_function=np.mean,
+        )
+        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.5)
+        plt.axis("off")
+        plt.tight_layout()
+        plt.savefig(dest_plots_dir / f"{ano}-hexbin-pseudolog.png", dpi=300)
+        plt.close(f)
+
     # Mapas coropléticos
     for ano in dengue_populacao_ano["ano"].unique():
-        print("Plotando mapa coroplético para o ano", ano)
         dengue_populacao_br_mun = process_geo_data_year(
             geo=br_mun,
             data=dengue_populacao_ano,
             ano=ano,
         )
 
+        # Plot mapa coroplético
+        print("Plotando mapa para o ano", ano)
         f, ax = plt.subplots()
         f.set_size_inches(12, 12)
-
-        plot_mapa_coropletico(br_uf, dengue_populacao_br_mun, ax, ano)
-
-        plt.axis("off")
+        data = dengue_populacao_br_mun[dengue_populacao_br_mun["ano"] == ano]
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("bottom", size="5%", pad=0.1)
+        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        data.plot(
+            column="incidencia",
+            cmap="GnBu",
+            ax=ax,
+            legend=True,
+            cax=cax,
+            legend_kwds={
+                "label": f"Taxa de Incidência de Dengue em {ano}",
+                "orientation": "horizontal",
+            },
+        )
+        ax.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-coro.png", dpi=300)
+        plt.close(f)
+
+        # Plot mapa coroplético pseudolog
+        print("Plotando mapa pseudolog para o ano", ano)
+        f, ax = plt.subplots()
+        f.set_size_inches(12, 12)
+        data = dengue_populacao_br_mun[dengue_populacao_br_mun["ano"] == ano]
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("bottom", size="5%", pad=0.1)
+        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        data.plot(
+            column="pseudolog_incidencia",
+            cmap="GnBu",
+            ax=ax,
+            legend=True,
+            cax=cax,
+            legend_kwds={
+                "label": f"Pseudo-Logaritmo da Taxa de Incidência de Dengue em {ano}",
+                "orientation": "horizontal",
+            },
+        )
+        ax.axis("off")
+        plt.tight_layout()
+        plt.savefig(dest_plots_dir / f"{ano}-coro-pseudolog.png", dpi=300)
         plt.close(f)
 
 
