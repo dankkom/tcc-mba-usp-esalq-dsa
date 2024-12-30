@@ -15,6 +15,30 @@ def pseudolog(x):
     return np.sign(x) * np.log1p(abs(x))
 
 
+def plot_mapa_hexbin(
+    br_uf,
+    dengue_data,
+    ax,
+    column="notificacoes",
+    cmap="GnBu",
+    gridsize=100,
+    bins="log",
+    alpha=0.7,
+):
+    hb = ax.hexbin(
+        dengue_data.geometry.x,
+        dengue_data.geometry.y,
+        C=dengue_data[column],
+        gridsize=gridsize,
+        bins=bins,
+        cmap=cmap,
+        alpha=alpha,
+        mincnt=1,
+        reduce_C_function=np.sum,
+    )
+    br_uf.plot(ax=ax, facecolor="none", edgecolor="#d0d0d0", linewidth=1)
+
+
 def plot_mapa_coropletico(br_uf, dengue_data, ax, ano):
     data = dengue_data[dengue_data["ano"] == ano]
     data["pseudolog_incidencia"] = pseudolog(data.incidencia)
@@ -139,6 +163,20 @@ def main():
         plt.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}.png", dpi=300)
+        plt.close(f)
+
+        # Mapa HEXBIN
+        print("Plotando mapa HEXBIN para o ano", ano)
+
+        f, ax = plt.subplots()
+        f.set_size_inches(12, 12)
+
+        # Plot mapa HEXBIN
+        ax = plot_mapa_hexbin(br_uf, dengue_populacao_br_mun, ax)
+
+        plt.axis("off")
+        plt.tight_layout()
+        plt.savefig(dest_plots_dir / f"{ano}-hexbin.png", dpi=300)
         plt.close(f)
 
     # Mapas coropléticos
