@@ -4,6 +4,10 @@ Para instalar o pacote datasus-fetcher, execute o comando abaixo no terminal:
 
     pip install datasus-fetcher
 
+Files output:
+
+- data/datasus/**/*.dbc
+
 """
 
 import logging

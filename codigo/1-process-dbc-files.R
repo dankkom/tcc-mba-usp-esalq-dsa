@@ -1,12 +1,21 @@
 # Conversão dos arquivos "DBC" do DATASUS para parquet
-
-# Para instalar os pacotes necessários, execute:
-
-# install.packages("arrow")
-# install.packages("dplyr")
-# install.packages("fs")
-# install.packages("read.dbc")
-# install.packages("tibble")
+#
+# Instalar os pacotes necessários:
+#
+# - arrow
+# - dplyr
+# - fs
+# - read.dbc
+# - tibble
+#
+# Files dependencies:
+#
+# - data/datasus/**/*.dbc
+#
+# Output files:
+#
+# - data/datasus/parquet/**/*.parquet
+#
 
 # Carregando bibliotecas
 library(arrow)

@@ -1,3 +1,20 @@
+"""
+This script loads and transforms the dengue, population and municipalities data.
+
+Files dependencies:
+
+- data/sinan-dengue.parquet
+- data/populacao-municipios.parquet
+- data/br_mun.gpkg
+
+Files output:
+
+- data/dengue-populacao-mun.csv
+- data/dengue-populacao-mun-mes.csv
+- data/dengue-populacao-mun-ano.csv
+
+"""
+
 import warnings
 from pathlib import Path
 
@@ -10,10 +27,9 @@ warnings.filterwarnings("ignore")
 def load_transform_dengue(data_dir: Path):
     # Dados Dengue
     dengue = (
-        pd.read_csv(
-            data_dir / "sinan-dengue.csv",
-            usecols=["DT_NOTIFIC", "NU_ANO", "ID_MUNICIP", "CLASSI_FIN"],
-            dtype=str,
+        pd.read_parquet(
+            data_dir / "sinan-dengue.parquet",
+            columns=["DT_NOTIFIC", "NU_ANO", "ID_MUNICIP", "CLASSI_FIN"],
         )
         .query("CLASSI_FIN != 'Descartado' and NU_ANO >= '2020'")
         .drop(columns="CLASSI_FIN")
@@ -38,12 +54,11 @@ def load_transform_dengue(data_dir: Path):
 def load_transform_populacao(data_dir: Path):
     # Dados População
     populacao = (
-        pd.read_csv(
-            data_dir / "populacao-municipios.csv",
-            parse_dates=["data"],
-            dtype={"municipio_id": str},
+        pd.read_parquet(data_dir / "populacao-municipios.parquet")
+        .assign(
+            data=lambda x: pd.to_datetime(x["data"]),
+            id_municipio_6=lambda x: x["municipio_id"].str[:6],
         )
-        .assign(id_municipio_6=lambda x: x["municipio_id"].str[:6])
         .drop(columns="municipio_id")
     )
 

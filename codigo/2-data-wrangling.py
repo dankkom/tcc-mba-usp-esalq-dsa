@@ -1,4 +1,15 @@
-"""Rotinas para limpeza e preparação dos dados do SINAN Dengue para análise."""
+"""Rotinas para limpeza e preparação dos dados do SINAN Dengue para análise.
+
+Files dependencies:
+
+- data/datasus/parquet/*.parquet
+
+Output files:
+
+- data/sinan-dengue.csv
+- data/sinan-dengue.parquet
+
+"""
 
 import warnings
 from pathlib import Path

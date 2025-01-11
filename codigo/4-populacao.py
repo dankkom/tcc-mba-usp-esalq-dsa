@@ -6,6 +6,15 @@
 https://pandas.pydata.org/docs/reference/api/pandas.Series.interpolate.html
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.resample.html
 
+Files dependencies:
+
+- data/populacao-municipios.xlsx
+
+Output files:
+
+- data/populacao-municipios.csv
+- data/populacao-municipios.parquet
+
 """
 
 import warnings

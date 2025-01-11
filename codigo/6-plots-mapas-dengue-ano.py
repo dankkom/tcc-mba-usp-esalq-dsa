@@ -1,3 +1,22 @@
+"""Plotagem de mapas de dengue por ano.
+
+Files dependencies:
+
+- data/dengue-populacao-mun-ano.csv
+- data/br_mun.gpkg
+- data/br_uf.json
+
+Output files:
+
+- output/plots/dengue-ano/{ano}-points.png
+- output/plots/dengue-ano/{ano}-hexbin.png
+- output/plots/dengue-ano/{ano}-hexbin-pseudolog.png
+- output/plots/dengue-ano/{ano}-coro.png
+- output/plots/dengue-ano/{ano}-coro-pseudolog.png
+
+"""
+
+
 import warnings
 from pathlib import Path
 

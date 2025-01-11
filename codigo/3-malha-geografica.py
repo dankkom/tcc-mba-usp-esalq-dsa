@@ -10,6 +10,15 @@ Documentação da API do IBGE:
 
 https://servicodados.ibge.gov.br/api/docs/malhas?versao=3
 
+Output files:
+
+- data/br_mun.csv
+- data/br_mun.gpkg
+- data/br_regiao.json
+- data/br_uf.json
+- data/br_mesorregiao.json
+- data/br_microrregiao.json
+
 """
 
 from pathlib import Path
