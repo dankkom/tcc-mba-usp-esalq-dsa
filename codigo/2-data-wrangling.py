@@ -1,9 +1,12 @@
 """Rotinas para limpeza e preparação dos dados do SINAN Dengue para análise."""
 
+import warnings
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+
+warnings.filterwarnings("ignore")
 
 F_MINUTOS = 1 / (60 * 24 * 365)
 F_HORAS = 1 / (24 * 365)
