@@ -1,5 +1,14 @@
-library(tidyverse)
+# Header -------------------------------------------------------------------
+# Author: Daniel Kiyoyudi Komesu
+# Date: 2025-01-12
+# Purpose: Plot seasonal plots and incidence rate by state
+
+# Library Imports ----------------------------------------------------------
 library(arrow)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(scales)
 
 
 dados <- arrow::read_parquet("data/sinan-dengue.parquet")
@@ -33,30 +42,15 @@ ggplot2::ggsave(
 )
 
 # Análise de sazonalidade
-dados_br %>%
-  ggplot2::ggplot(ggplot2::aes(x = anomes, y = notificacoes)) +
-  ggplot2::geom_line() +
-  ggplot2::labs(
-    title = "Notificações de dengue no Brasil",
-    x = "Ano-Mês",
-    y = "Notificações de Dengue",
-  ) +
-  ggplot2::theme_minimal() +
-  ggplot2::facet_wrap(~lubridate::month(anomes), scales = "free_y")
-ggplot2::ggsave(
-  "output/plots/seasonal-plot-facet.jpg",
-  width = 10,
-  height = 6,
-  dpi = 100,
-)
-
-
 forecast::ggsubseriesplot(
   ts(dados_br$notificacoes, frequency = 12),
   ylab = "Notificações",
   xlab = "Mês",
   main = "Notificações de dengue no Brasil"
-)
+) +
+  # Format y axis labels
+  ggplot2::scale_y_continuous(labels = scales::number) +
+  ggplot2::theme_minimal()
 ggplot2::ggsave(
   "output/plots/seasonal-plot-subseries.jpg",
   width = 10,
