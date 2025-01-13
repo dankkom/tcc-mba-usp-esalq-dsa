@@ -10,8 +10,11 @@ Files dependencies:
 Files output:
 
 - data/dengue-populacao-mun.csv
+- data/dengue-populacao-mun.parquet
 - data/dengue-populacao-mun-mes.csv
+- data/dengue-populacao-mun-mes.parquet
 - data/dengue-populacao-mun-ano.csv
+- data/dengue-populacao-mun-ano.parquet
 
 """
 
@@ -29,7 +32,7 @@ def load_transform_dengue(data_dir: Path):
     dengue = (
         pd.read_parquet(
             data_dir / "sinan-dengue.parquet",
-            columns=["DT_NOTIFIC", "NU_ANO", "ID_MUNICIP", "CLASSI_FIN"],
+            columns=["DT_NOTIFIC", "NU_ANO", "SG_UF_NOT", "ID_MUNICIP", "CLASSI_FIN"],
         )
         .query("CLASSI_FIN != 'Descartado' and NU_ANO >= '2020'")
         .drop(columns="CLASSI_FIN")
@@ -37,13 +40,13 @@ def load_transform_dengue(data_dir: Path):
             DT_NOTIFIC=lambda x: pd.to_datetime(x.DT_NOTIFIC),
             notificacoes=1,
         )
-        .rename(columns={"DT_NOTIFIC": "data", "ID_MUNICIP": "id_municipio_6"})
+        .rename(columns={"DT_NOTIFIC": "data", "SG_UF_NOT": "sigla_uf", "ID_MUNICIP": "id_municipio_6"})
     )
     dengue = dengue.loc[
         (dengue["id_municipio_6"].str.len() == 6) & (dengue["data"].notnull())
     ]
     dengue = (
-        dengue.groupby(["data", "id_municipio_6"])
+        dengue.groupby(["data", "sigla_uf", "id_municipio_6"])
         .agg({"notificacoes": "sum"})
         .reset_index()
     )
@@ -110,11 +113,12 @@ def main():
         data_dir / "dengue-populacao-mun.csv",
         index=False,
     )
+    dengue_populacao_mun.to_parquet(data_dir / "dengue-populacao-mun.parquet")
 
     # Agregado por mês
     dengue_populacao_mun_mes = (
         dengue_populacao_mun.assign(anomes=lambda x: x["data"].dt.to_period("M"))
-        .groupby(["anomes", "id_municipio_6", "longitude", "latitude"])
+        .groupby(["anomes", "sigla_uf", "id_municipio_6", "longitude", "latitude"])
         .agg(
             notificacoes=pd.NamedAgg(column="notificacoes", aggfunc="sum"),
             populacao_estimada=pd.NamedAgg(column="populacao_estimada", aggfunc="mean"),
@@ -129,11 +133,12 @@ def main():
         data_dir / "dengue-populacao-mun-mes.csv",
         index=False,
     )
+    dengue_populacao_mun_mes.to_parquet(data_dir / "dengue-populacao-mun-mes.parquet")
 
     # Agregado por ano
     dengue_populacao_mun_ano = (
         dengue_populacao_mun.assign(ano=lambda x: x["data"].dt.year)
-        .groupby(["ano", "id_municipio_6", "longitude", "latitude"])
+        .groupby(["ano", "sigla_uf", "id_municipio_6", "longitude", "latitude"])
         .agg(
             notificacoes=pd.NamedAgg(column="notificacoes", aggfunc="sum"),
             populacao_estimada=pd.NamedAgg(column="populacao_estimada", aggfunc="mean"),
@@ -148,6 +153,7 @@ def main():
         data_dir / "dengue-populacao-mun-ano.csv",
         index=False,
     )
+    dengue_populacao_mun_ano.to_parquet(data_dir / "dengue-populacao-mun-ano.parquet")
 
 
 if __name__ == "__main__":
