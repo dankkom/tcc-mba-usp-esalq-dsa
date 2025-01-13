@@ -103,6 +103,7 @@ def main():
             alpha=alpha,
             ax=ax,
         )
+        ax.set_title(f"{ano}")
         # Legenda de bolhas
         # Adaptado de https://stackoverflow.com/a/73354795
         bins = np.array([10, 50, 100, 500])
@@ -145,6 +146,7 @@ def main():
             reduce_C_function=np.mean,
         )
         br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.5)
+        ax.set_title(f"{ano}")
         plt.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-hexbin.png", dpi=300)
@@ -198,6 +200,7 @@ def main():
                 "orientation": "horizontal",
             },
         )
+        ax.set_title(f"{ano}")
         ax.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-coro.png", dpi=300)
@@ -222,6 +225,7 @@ def main():
                 "orientation": "horizontal",
             },
         )
+        ax.set_title(f"{ano}")
         ax.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-coro-pseudolog.png", dpi=300)
