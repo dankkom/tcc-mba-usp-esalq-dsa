@@ -184,7 +184,125 @@ plot_pyramid_chart <- function(dados) {
     "output/plots/pyramid-chart.jpg",
     width = 12,
     height = 6,
-    dpi = 100,
+    dpi = 300,
+  )
+}
+
+
+
+plot_line_chart <- function(dados) {
+  # Plot line chart
+  dados_piramide <- dados %>%
+    dplyr::filter(NU_ANO == 2024, CS_SEXO != "Ignorado") %>%
+    # Create age groups with the NU_IDADE_N column, with intervals of 5 years
+    dplyr::mutate(
+      faixa_etaria = dplyr::case_when(
+        NU_IDADE_N < 5 ~ "0-4",
+        NU_IDADE_N < 10 ~ "5-9",
+        NU_IDADE_N < 15 ~ "10-14",
+        NU_IDADE_N < 20 ~ "15-19",
+        NU_IDADE_N < 25 ~ "20-24",
+        NU_IDADE_N < 30 ~ "25-29",
+        NU_IDADE_N < 35 ~ "30-34",
+        NU_IDADE_N < 40 ~ "35-39",
+        NU_IDADE_N < 45 ~ "40-44",
+        NU_IDADE_N < 50 ~ "45-49",
+        NU_IDADE_N < 55 ~ "50-54",
+        NU_IDADE_N < 60 ~ "55-59",
+        NU_IDADE_N < 65 ~ "60-64",
+        NU_IDADE_N < 70 ~ "65-69",
+        NU_IDADE_N < 75 ~ "70-74",
+        NU_IDADE_N < 80 ~ "75-79",
+        NU_IDADE_N < 85 ~ "80-84",
+        NU_IDADE_N < 90 ~ "85-89",
+        NU_IDADE_N < 95 ~ "90-94",
+        NU_IDADE_N < 100 ~ "95-99",
+        TRUE ~ "100+"
+      ),
+      # Convert faixa_etaria to factor to keep the order
+      faixa_etaria = factor(
+        faixa_etaria,
+        levels = c(
+          "0-4",
+          "5-9",
+          "10-14",
+          "15-19",
+          "20-24",
+          "25-29",
+          "30-34",
+          "35-39",
+          "40-44",
+          "45-49",
+          "50-54",
+          "55-59",
+          "60-64",
+          "65-69",
+          "70-74",
+          "75-79",
+          "80-84",
+          "85-89",
+          "90-94",
+          "95-99",
+          "100+"
+        )
+      ),
+    ) %>%
+    dplyr::group_by(faixa_etaria, CS_SEXO) %>%
+    dplyr::summarise(notificacoes = dplyr::n(), .groups = "drop")
+
+  faixa_etaria_labels <- tibble::tibble(
+    faixa_etaria = c(
+      "0-4",
+      "5-9",
+      "10-14",
+      "15-19",
+      "20-24",
+      "25-29",
+      "30-34",
+      "35-39",
+      "40-44",
+      "45-49",
+      "50-54",
+      "55-59",
+      "60-64",
+      "65-69",
+      "70-74",
+      "75-79",
+      "80-84",
+      "85-89",
+      "90-94",
+      "95-99",
+      "100+"
+    )
+  ) %>%
+    dplyr::mutate(faixa_etaria = forcats::fct_inorder(faixa_etaria))
+
+
+  dados_piramide |>
+    ggplot(aes(x = faixa_etaria, y = notificacoes, colour = CS_SEXO, group = CS_SEXO)) +
+    geom_line(linewidth = 1) +
+    geom_point(size = 4) +
+    scale_y_continuous(labels = scales::label_number(accuracy = 1)) +
+    labs(
+      x = "Faixa etária",
+      y = "Número de notificações",
+      colour = "Sexo"
+    ) +
+    theme_minimal() +
+    # Put legend at the top
+    theme(
+      legend.position = "top",
+      # Increase text sizes
+      axis.text = element_text(size = 10),
+      axis.title = element_text(size = 12),
+      legend.title = element_text(size = 12),
+      legend.text = element_text(size = 12),
+    )
+  ggsave(
+    "output/plots/pyramid-chart-line.jpg",
+    width = 12,
+    height = 6,
+    dpi = 300,
   )
 }
 
@@ -194,3 +312,6 @@ dados <- arrow::read_parquet("data/sinan-dengue.parquet")
 
 # Plot pyramid chart
 plot_pyramid_chart(dados)
+
+# Plot line chart
+plot_line_chart(dados)
