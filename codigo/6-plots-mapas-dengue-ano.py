@@ -145,9 +145,9 @@ def main():
             mincnt=1,
             reduce_C_function=np.mean,
         )
-        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.5)
+        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.8)
         ax.set_title(f"{ano}")
-        plt.axis("off")
+        ax.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-hexbin.png", dpi=300)
         plt.close(f)
@@ -167,8 +167,9 @@ def main():
             mincnt=1,
             reduce_C_function=np.mean,
         )
-        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.5)
-        plt.axis("off")
+        br_uf.plot(ax=ax, legend=True, facecolor="none", edgecolor="#808080", linewidth=0.8)
+        ax.set_title(f"{ano}")
+        ax.axis("off")
         plt.tight_layout()
         plt.savefig(dest_plots_dir / f"{ano}-hexbin-pseudolog.png", dpi=300)
         plt.close(f)
