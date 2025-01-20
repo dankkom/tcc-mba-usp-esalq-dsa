@@ -1,0 +1,27 @@
+## 3. Resultados Preliminares
+
+### Distribuição Geográfica
+
+Regiões Norte e Nordeste: Observou-se um aumento significativo na taxa de incidência de dengue, especialmente nos estados do Pará e Bahia. A análise espacial revelou clusters de alta incidência em áreas urbanas densamente povoadas.
+
+Regiões Sudeste e Sul: Houve uma redução na taxa de incidência em comparação com anos anteriores, possivelmente devido a campanhas eficazes de controle do mosquito e melhorias na infraestrutura de saúde pública.
+
+### Temporalidade
+
+Picos Sazonais: A incidência de dengue apresentou picos durante os meses de verão, correlacionando-se com o aumento das chuvas e temperaturas mais altas, que favorecem a proliferação do Aedes aegypti.
+
+Tendências Anuais: Comparando os dados de 2023 com 2024, notou-se uma leve diminuição na incidência geral, sugerindo que as medidas de prevenção e controle implementadas estão começando a surtir efeito.
+
+### Análise Demográfica
+
+Faixa Etária: A maior parte dos casos foi registrada em indivíduos entre 15 e 45 anos, com uma ligeira predominância em mulheres.
+
+Impacto Socioeconômico: Áreas com menor Índice de Desenvolvimento Humano (IDH) apresentaram taxas de incidência mais altas, indicando uma correlação entre condições socioeconômicas e vulnerabilidade à dengue.
+
+### Visualização de Dados
+
+Mapas de Calor: Foram utilizados para identificar hotspots de dengue, facilitando a visualização das áreas mais afetadas.
+
+
+
+Gráficos de Linha e Barras: Demonstraram a evolução temporal da incidência de dengue, permitindo uma análise comparativa entre diferentes períodos e regiões.

@@ -1,0 +1,17 @@
+# Considerações Finais
+
+A análise da distribuição espacial e temporal da dengue no Brasil entre 2020 e 2024 revelou um cenário complexo e desafiador. Os resultados obtidos neste estudo evidenciam a necessidade de intensificar as ações de controle e prevenção da doença.
+
+A identificação de áreas com alta incidência, a caracterização da sazonalidade e a análise do perfil demográfico dos casos contribuem para uma melhor compreensão da epidemiologia da dengue no país.
+
+A heterogeneidade da distribuição espacial da incidência de dengue no Brasil evidencia a importância de considerar as especificidades de cada região e município ao planejar e implementar ações de controle e prevenção da doença. A identificação das áreas de maior risco e a compreensão dos fatores que influenciam a transmissão da dengue são essenciais para o desenvolvimento de estratégias mais eficazes e para a redução do impacto da doença na saúde pública.
+
+A série temporal das notificações de dengue no Brasil revela um cenário epidemiológico complexo e dinâmico, caracterizado por elevada sazonalidade, picos epidêmicos recorrentes e um aumento significativo no número de casos a partir do final de 2023. Esses resultados destacam a necessidade de intensificar as ações de vigilância, controle e prevenção da dengue no país, com foco na identificação e controle dos fatores que contribuem para a transmissão da doença.
+
+A forte sazonalidade observada, com picos epidêmicos nos meses mais quentes do ano, ressalta a importância de ações de controle que considerem as variações climáticas e a biologia do vetor. Além disso, a análise do perfil demográfico dos casos permite identificar os grupos populacionais mais vulneráveis e direcionar as ações de prevenção e controle.
+
+É fundamental destacar as limitações do estudo e a necessidade de pesquisas futuras para aprofundar o conhecimento sobre a epidemiologia da dengue no Brasil. Também é importante considerar que os dados de notificação podem subestimar o número real de casos de dengue, o que pode influenciar a interpretação dos resultados.
+
+A análise visual do mapa permite identificar padrões gerais, mas não permite estabelecer relações de causalidade entre a distribuição espacial da dengue e os fatores determinantes. Estudos mais aprofundados, utilizando técnicas de análise espacial e modelos estatísticos, são necessários para identificar os fatores que mais influenciam a ocorrência da doença em cada região do país.
+
+A distribuição da dengue no Brasil é heterogênea, com variações significativas entre as regiões e os municípios. A análise de dados desagregados por localidade pode fornecer informações mais detalhadas sobre a dinâmica da doença.

@@ -1,0 +1,17 @@
+## Referências
+
+Akima, H. 1970. A New Method of Interpolation and Smooth Curve Fitting Based on Local Procedures. Journal of the Association for Computing Machinery 17 (4): 589-602.
+
+Brasil. Ministério da Saúde. 2024a. Dengue. Saúde de A a Z. Disponível em: <https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/d/dengue>. Acesso em: 06 set. 2024.
+
+Galdas P. M.; Cheater F.; Marshall P. 2005. Men and health help-seeking behaviour: literature review. Journal of Advanced Nursing 49(6): 616-623.
+
+Instituto Brasileiro de Geografia e Estatística – IBGE. 2024. API de malhas geográficas: API e Documentação. Rio de Janeiro: IBGE. Disponível em: <https://servicodados.ibge.gov.br/api/docs/malhas?versao=3>. Acesso em: 30 dez. 2024.
+
+Ferreira, P. G. C. 2017. In: Ferreira, P. G. C. Análise de Séries Temporais em R: Curso Introdutório. v.1. GEN Atlas, São Paulo, SP, Brasil.
+
+Skalinski, L. M.; Costa, M. da C. N.; Teixeira, M. da G. L. 2019. Contribuições da análise espacial para a compreensão da dinâmica de transmissão da dengue: revisão integrativa. Journal of Health & Biological Sciences, 7(1) (Jan-Mar), p. 53-63. Disponível em: <https://periodicos.unichristus.edu.br/jhbs/article/view/2115>. Acesso em: 18 out. 2024.
+
+Viana, D. V.; Ignotti, E. 2013. A ocorrência da dengue e variações meteorológicas no Brasil: revisão sistemática. Revista Brasileira de Epidemiologia, 16(2), 240-256. https://doi.org/10.1590/S1415-790X2013000200002
+
+REDE Interagencial de Informação para a Saúde [RIPSA]. 2008. Taxa de incidência de dengue. p. 182-183. In: RIPSA. Indicadores básicos para a saúde no Brasil: conceitos e aplicações. 2ed. Organização Pan-Americana da Saúde, Brasília, DF, Brasil. Disponível em: <http://tabnet.datasus.gov.br/tabdata/livroidb/2ed/indicadores.pdf>. Acesso em: 16 dez. 2024.

@@ -1,0 +1,117 @@
+# Resultados Preliminares
+
+A análise epidemiológica da dengue no Brasil revela um cenário preocupante com escalada significativa no número de casos. Em 2023, o país registrou 1,51 milhões de casos confirmados, resultando em uma taxa de incidência de 1.096 casos por mil habitantes. O ano de 2024 apresentou um agravamento dramático da situação, com 6,48 milhões de casos confirmados e uma taxa de incidência que alcançou 6.004 casos por mil habitantes. Os resultados apresentados a seguir baseiam-se nos dados do Sistema de Informação de Agravos de Notificação (SINAN) disponíveis em 7 de janeiro de 2025.
+
+## Distribuição espacial da incidência de dengue
+
+Para analisar a distribuição espacial da taxa de incidência de dengue, foi elaborado um conjunto de mapas de bolhas utilizando os pacotes GeoPandas e Matplotlib do Python. Cada município brasileiro foi representado por uma bolha, cujo tamanho é proporcional à taxa de incidência e cuja localização corresponde ao centróide municipal. A técnica de sobreposição de bolhas com transparência foi empregada para evidenciar áreas com alta densidade de casos, permitindo a identificação de clusters de alta incidência e a visualização da heterogeneidade espacial da doença.
+
+A análise do mapa de distribuição espacial da taxa de incidência de dengue no Brasil em 2024 revela um padrão heterogêneo de ocorrência da doença no território nacional. Observa-se uma concentração significativa de casos nas regiões Sul e Sudeste e, em menor concentração, na região Centro-Oeste, com destaque para os estados de Minas Gerais, São Paulo, oeste dos estados do Sul, Goiás. Também se observa significativa concentração de casos no sul da Bahia e na região litorânea leste dos estados do Nordeste.
+
+Nesses estados, a densidade de casos é consideravelmente mais elevada, evidenciada pela maior frequência de bolhas de maior tamanho. Em contrapartida, as regiões Norte e Sul apresentam, de forma geral, menores taxas de incidência, com menor frequência de bolhas e predominância de casos com taxas inferiores.
+
+A distribuição espacial da dengue no Brasil apresenta uma forte relação com fatores socioeconômicos, ambientais e climáticos. As áreas com maior densidade de casos coincidem, em grande parte, com regiões de maior urbanização, precariedade nas condições de saneamento básico e temperaturas elevadas, que favorecem a proliferação do mosquito *Aedes aegypti*, vetor da doença.
+
+Mapa 1 – Mapas das taxas de incidência de dengue, pontos localizados nos centróides dos municípios, 2023-2024.
+
+![](output/plots/dengue-ano/2023-points.png)
+![](output/plots/dengue-ano/2024-points.png)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+Analisando o mapa de taxa de incidência de dengue por município em 2024, observa-se uma grande concentração nos estados de Minas Gerais, São Paulo, oeste dos estados da região sul e em Goiás e Distrito Federal (Mapa 1). Vale notar a falta de informações de notificações de dengue para o estado do Espírito Santo, evidenciado no mapa.
+
+Também foram analisadas as taxas de incidência por unidade federativa. Em 2023, observa-se uma concentração significativa de casos nas regiões Sul, Sudeste e Centro-Oeste, com destaque para os estados de Santa Catarina, Minas Gerais, Paraná, Mato Grosso do Sul e o Distrito Federal. Essas unidades federativas apresentaram as maiores taxas de incidência, evidenciando a necessidade de ações de controle mais robustas nessas localidades. As regiões Norte e Nordeste, por sua vez, apresentaram, em geral, taxas de incidência menores.
+
+Gráfico 1 – Taxas de incidência de dengue por Unidade Federativa, 2023-2024
+
+![](output/plots/incidencia-uf-2023-2024.jpg)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+No ano de 2024, houve um aumento substancial da incidência de dengue em diversos estados, com destaque para o Distrito Federal, que apresentou a maior taxa de incidência do país. Minas Gerais manteve-se com altas taxas, consolidando as regiões Sudeste e Centro-Oeste como um dos epicentros da doença no Brasil.
+
+Comparando os dois anos, observa-se um dramático aumento da incidência de dengue em diversas regiões do país, o que sugere a necessidade de intensificar as ações de controle e prevenção. Além disso, a distribuição geográfica da doença apresentou algumas mudanças, com o surgimento de novos focos e a intensificação de outros já existentes.
+
+Gráfico 2 – Boxplots das incidências de dengue municipais por grande região, Brasil, 2024
+
+![](output/plots/incidencia-regiao-boxplot.jpg)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+A análise da distribuição espacial da incidência de dengue no Brasil em 2024, conforme evidenciado pelo gráfico de boxplot (Gráfico 2), revela um cenário epidemiológico heterogêneo entre as regiões. Observa-se uma ampla variação nas taxas de incidência entre as diferentes regiões geográficas do país, com a região Sudeste apresentando as maiores taxas e as regiões Norte e Nordeste as menores.
+
+A região Sudeste se destaca pela elevada mediana e pelo amplo intervalo interquartil, indicando uma grande variabilidade nas taxas de incidência entre os municípios dessa região. A presença de diversos outliers sugere a ocorrência de surtos epidêmicos em localidades específicas. As regiões Centro-Oeste e Sul apresentam padrões intermediários, com medianas e intervalos interquartis menores em comparação com a região Sudeste. As regiões Norte e Nordeste, por sua vez, apresentam as menores medianas e intervalos interquartis, indicando menores taxas de incidência de maneira geral.
+
+A heterogeneidade observada na distribuição espacial da dengue pode ser atribuída a diversos fatores, tais como: condições climáticas – temperatura, umidade e precipitação influenciam diretamente o ciclo de vida do mosquito vetor e a transmissão da doença; e características socioeconômicas – a densidade populacional, o nível de urbanização, as condições de saneamento básico e o acesso aos serviços de saúde são fatores que podem influenciar a vulnerabilidade das populações à dengue.
+
+## Séries temporais dos casos de dengue total
+
+A análise da série temporal das notificações de dengue no Brasil, no período compreendido entre janeiro de 2020 e dezembro de 2024, revela um padrão caracterizado por elevada sazonalidade e picos epidêmicos recorrentes. Observa-se um aumento significativo nas notificações a partir dos últimos meses de 2023, culminando em um pico epidêmico sem precedentes em março em abril de 2024. Esse pico representa um aumento substancial em relação aos anos anteriores, indicando uma expansão e intensificação da transmissão da dengue no país (Gráfico 3).
+
+Gráfico 3 – Notificações mensais de Dengue, Brasil, 2020 a 2024
+
+![](output/plots/timeseries-plot.jpg)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+É importante destacar a presença de picos epidêmicos sazonais, com maior concentração de casos nos meses mais quentes do ano (março e abril), o que corrobora a relação entre a transmissão do vírus da dengue e as condições climáticas favoráveis à proliferação do mosquito *Aedes aegypti* (Gráfico 4).
+
+Essa sazonalidade está fortemente relacionada às condições climáticas favoráveis à proliferação do mosquito *Aedes aegypti*, vetor da dengue. A elevação das temperaturas e o aumento das chuvas proporcionam um ambiente propício para o desenvolvimento dos mosquitos e, consequentemente, para a transmissão do vírus (Viana e Ignotti, 2013).
+
+A análise do gráfico também evidencia uma grande variabilidade na magnitude dos picos epidêmicos entre os anos, com alguns anos apresentando surtos mais intensos do que outros. Essa variabilidade pode ser atribuída a diversos fatores, como a variabilidade climática interanual e a eficácia das medidas de controle implementadas.
+
+Gráfico 4 – Sazonalidade mensal das notificações de dengue, Brasil, 2020 a 2024
+
+![](output/plots/seasonal-plot-subseries.jpg)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+Além da sazonalidade, a série temporal apresenta uma tendência de aumento no número de casos nos últimos anos, com o pico epidêmico de 2024 sendo o mais elevado do período analisado.
+
+A grande variabilidade na magnitude dos picos epidêmicos entre os anos e a tendência de aumento no número de casos nos últimos anos destacam a complexidade da dinâmica da transmissão da dengue e a necessidade de um monitoramento contínuo e de ações de controle mais eficazes.
+
+## Perfil demográfico dos casos de dengue
+
+Nesta subseção são caracterizados os casos de dengue de 2024 para melhor compreensão da população afetada pela doença.
+
+A análise dos casos confirmados de dengue por faixa etária no Brasil em 2024 revela um perfil epidemiológico caracterizado por uma ampla distribuição por faixa etária, parecido com a pirâmide etária da população geral, com predomínio em determinados grupos populacionais.
+
+Observa-se um elevado número de casos entre a população adulta jovem (nas faixas de 20 a 44 anos). A partir da faixa etária de 45 anos, a pirâmide se estreita gradualmente, com uma grande redução no número de casos nas faixas etárias mais avançadas.
+
+Gráfico 5 – Casos confirmados de dengue por faixa etária e sexo, Brasil, 2024
+
+![](output/plots/pyramid-chart-line.jpg)
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+Tabela 1 – Casos confirmados de dengue por sexo e grupos de idade, Brasil, 2024
+
+| **Grupos de Idade** | **Feminino**  | **Masculino** | **Ignorado** | **Total**     | **% Total** |
+|---------------------|--------------:|--------------:|-------------:|--------------:|------------:|
+| **0 a 4 anos**      |      99.827   |     110.919   |       413    |     211.159   |     3,26%   |
+| **5 a 9 anos**      |     161.389   |     183.314   |       475    |     345.178   |     5,33%   |
+| **10 a 19 anos**    |     469.248   |     507.628   |     1.487    |     978.363   |    15,10%   |
+| **20 a 39 anos**    |   1.218.469   |   1.012.401   |     3.371    |   2.234.241   |    34,48%   |
+| **40 a 59 anos**    |   1.025.940   |     728.992   |     2.790    |   1.757.722   |    27,12%   |
+| **60+ anos**        |     559.624   |     392.912   |     1.489    |     954.025   |    14,72%   |
+| **TOTAL**           | **3.534.497** | **2.936.166** |   **10.025** | **6.480.688** | **100,00%** |
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+É importante destacar disparidade na distribuição por sexo, com um predomínio do sexo feminino nas faixas etárias acima de 15 anos. Essa disparidade sugere uma subnotificação de casos de dengue em homens. Pesquisas indicam que homens tendem a evitar ou adiar a procura por atendimento médico em comparação às mulheres. Essa diferença de comportamento pode ser atribuída a fatores socioculturais, como normas de masculinidade que desencorajam a expressão de vulnerabilidade e a busca por cuidados de saúde (Galdas et al., 2005).
+
+Tabela 2 – Cor/Raça das pessoas com casos confirmados de dengue, Brasil, 2024
+
+| **Cor/Raça** | **Casos**     | **%**       |
+| ------------ | ------------: | ----------: |
+| Branca       |     2.718.205 |    41,94%   |
+| Parda        |     2.230.430 |    34,42%   |
+| Ignorado     |     1.188.930 |    18,35%   |
+| Preta        |       327.583 |     5,05%   |
+| Indígena     |        15.540 |     0,24%   |
+| **TOTAL**    | **6.480.688** | **100,00%** |
+
+Fonte: elaboração própria com dados do Datasus (2025).
+
+O perfil demográfico de casos confirmados de dengue no Brasil em 2024 revela um perfil epidemiológico caracterizado por uma distribuição por faixa etária aderente à população brasileira.

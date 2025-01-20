@@ -1,0 +1,9 @@
+# Introdução
+
+A dengue, uma doença viral transmitida pelo mosquito *Aedes aegypti*, é um dos maiores desafios de saúde pública no Brasil e em muitas outras regiões tropicais e subtropicais do mundo. A complexidade da dengue reside não apenas na sua capacidade de causar surtos epidêmicos com morbidade relativamente alta, mas também na sua interação com fatores ambientais, sociais e econômicos que influenciam sua disseminação.
+
+Nos últimos anos, o Brasil tem enfrentado sucessivos surtos de dengue, com variações significativas na incidência entre diferentes regiões e períodos. A dengue não é apenas uma questão de saúde, mas também um reflexo das desigualdades sociais e econômicas que permeiam o país. Áreas com infraestrutura inadequada, saneamento básico deficiente e alta densidade populacional são particularmente vulneráveis à proliferação do mosquito vetor. Além disso, mudanças climáticas, como o aumento das temperaturas e a intensificação das chuvas, têm criado condições favoráveis para a reprodução do *Aedes aegypti*, exacerbando o problema (Brasil, 2024; Skalinski et al., 2019).
+
+Uma comunicação clara e objetiva permite informar os gestores públicos sobre os avanços da doença no espaço, através de mapas, e no tempo, através de gráficos de linhas. Com uma noção recente e apurada da evolução dos casos de dengue o poder público pode fazer campanhas e ações, antecipadamente, para a eliminação de criadouros de larvas do mosquito transmissor.
+
+Este estudo tem o objetivo de utilizar técnicas de análise de dados e ferramentas de visualização para mapear a incidência da dengue em diferentes regiões do país. Através da coleta e interpretação de dados, é possível identificar padrões de incidência, avaliar a eficácia das intervenções de saúde pública e prever possíveis surtos futuros.
