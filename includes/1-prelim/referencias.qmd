@@ -8,7 +8,7 @@ Galdas P. M.; Cheater F.; Marshall P. 2005. Men and health help-seeking behaviou
 
 Instituto Brasileiro de Geografia e Estatística – IBGE. 2024. API de malhas geográficas: API e Documentação. Rio de Janeiro: IBGE. Disponível em: <https://servicodados.ibge.gov.br/api/docs/malhas?versao=3>. Acesso em: 30 dez. 2024.
 
-Ferreira, P. G. C. 2017. In: Ferreira, P. G. C. Análise de Séries Temporais em R: Curso Introdutório. v.1. GEN Atlas, São Paulo, SP, Brasil.
+Ferreira, P. G. C.; Duca, V. E. L. de A. 2021. Modelos de Suavização Exponencial. p. 75-93. In: Ferreira, P. G. C. (Org.). Análise de Séries Temporais em R: Curso Introdutório. 1ed. GEN Atlas, São Paulo, SP, Brasil.
 
 Skalinski, L. M.; Costa, M. da C. N.; Teixeira, M. da G. L. 2019. Contribuições da análise espacial para a compreensão da dinâmica de transmissão da dengue: revisão integrativa. Journal of Health & Biological Sciences, 7(1) (Jan-Mar), p. 53-63. Disponível em: <https://periodicos.unichristus.edu.br/jhbs/article/view/2115>. Acesso em: 18 out. 2024.
 
