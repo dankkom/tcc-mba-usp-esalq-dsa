@@ -1,0 +1,28 @@
+---
+title: Análise e Visualização de Dados da Epidemia de Dengue no Brasil em 2023-2024
+author: Daniel Kiyoyudi Komesu
+date: now
+format: pdf
+---
+
+Aluno(a): Daniel Kiyoyudi Komesu
+
+Orientador(a): Adriano de Freitas Fernandes
+
+Curso: MBA em Data Science e Analytics
+
+Título: Análise e Visualização de Dados da Epidemia de Dengue no Brasil em 2023-2024
+
+**Resumo**: Este estudo teve como objetivo analisar a distribuição espacial e temporal da dengue no Brasil entre 2023 e 2024, utilizando dados do Sistema de Informação de Agravos de Notificação (SINAN). Foram calculadas taxas de incidência e realizadas análises de sazonalidade para identificar padrões e tendências na ocorrência da doença. Os resultados indicam um aumento significativo nos casos de dengue em 2024, com destaque para as regiões Sudeste e Centro-Oeste. A análise espacial revelou uma heterogeneidade na distribuição da doença, com maior concentração de casos em áreas urbanas e com condições socioeconômicas mais precárias. A análise temporal evidenciou uma marcada sazonalidade, com picos epidêmicos nos meses mais quentes do ano. O perfil dos casos confirmados mostrou um predomínio da população adulta jovem e uma distribuição desigual por sexo e cor/raça. Esses achados destacam a importância de implementar medidas de controle mais eficazes e de monitorar continuamente a situação epidemiológica da dengue no Brasil.
+
+**Palavras-chave:** saúde pública; arbovirose; Aedes aegypt.
+
+{{< include includes/1-prelim/0-introducao.qmd >}}
+
+{{< include includes/1-prelim/1-material-e-metodos.qmd >}}
+
+{{< include includes/1-prelim/2-resultados-preliminares.qmd >}}
+
+{{< include includes/1-prelim/3-conclusao.qmd >}}
+
+{{< include includes/1-prelim/referencias.qmd >}}
