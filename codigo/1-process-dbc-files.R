@@ -32,22 +32,25 @@ dir_create(dest_dir)
 
 main <- function() {
   # Lista de arquivos DBC
-  files <- dir_ls(
+  files <- fs::dir_ls(
     data_dir,
     recurse = TRUE,
     glob = "*.dbc"
   )
 
   for (file in files) {
-    dest_filepath <- path(dest_dir, glue::glue("{basename(dirname(file))}.parquet"))
+    dest_filepath <- fs::path(
+      dest_dir,
+      glue::glue("{basename(dirname(file))}.parquet")
+    )
     if (file_exists(dest_filepath)) {
       print(paste("Arquivo já processado:", file))
       next
     }
     print(paste("Lendo arquivo:", file))
     # Lendo arquivo DBC
-    read.dbc(file, as.is = TRUE) |>
-      as_tibble() |>
+    read.dbc::read.dbc(file, as.is = TRUE) |>
+      tibble::as_tibble() |>
       arrow::write_parquet(dest_filepath)
     gc()  # Coleta de lixo
   }
