@@ -100,20 +100,47 @@ plot_original_e_ajustada <- dados_br2 |>
     ggplot2::aes(anomes, ajustada, color = "Ajustada"),
     linetype = "dashed",
   ) +
+  ggplot2::scale_y_continuous(labels = scales::number) +
   # Put the legend at the top
-  ggplot2::theme(legend.position = "top")
+  ggplot2::theme_minimal() +
+  ggplot2::theme(
+    legend.position = "top",
+    legend.title = ggplot2::element_blank(),
+  ) +
+  ggplot2::labs(
+    x = "Ano-Mês",
+    y = "Notificações de Dengue",
+  )
 
 plot_tendencia <- dados_br2 |>
   ggplot2::ggplot(ggplot2::aes(anomes, tendencia)) +
-  ggplot2::geom_line()
+  ggplot2::geom_line() +
+  ggplot2::scale_y_continuous(labels = scales::number) +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(
+    x = "Ano-Mês",
+    y = "Tendência",
+  )
 
 plot_sazonalidade <- dados_br2 |>
   ggplot2::ggplot(ggplot2::aes(anomes, sazonal)) +
-  ggplot2::geom_line()
+  ggplot2::geom_line() +
+  ggplot2::scale_y_continuous(labels = scales::number) +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(
+    x = "Ano-Mês",
+    y = "Sazonalidade",
+  )
 
 plot_irregularidade <- dados_br2 |>
   ggplot2::ggplot(ggplot2::aes(anomes, irregular)) +
-  ggplot2::geom_line()
+  ggplot2::geom_line() +
+  ggplot2::scale_y_continuous(labels = scales::number) +
+  ggplot2::theme_minimal() +
+  ggplot2::labs(
+    x = "Ano-Mês",
+    y = "Irregularidade",
+  )
 
 
 # Plotar os gráficos numa única figura
@@ -121,10 +148,6 @@ plot_original_e_ajustada +
   plot_tendencia +
   plot_sazonalidade +
   plot_irregularidade +
-  patchwork::plot_annotation(
-    title = "Decomposição da série temporal de notificações de dengue no Brasil",
-    caption = "Fonte: SINAN"
-  ) +
   ggplot2::theme_minimal() +
   ggplot2::theme(legend.position = "bottom") +
   patchwork::plot_layout(ncol = 1, heights = c(2, 1, 1, 1))
