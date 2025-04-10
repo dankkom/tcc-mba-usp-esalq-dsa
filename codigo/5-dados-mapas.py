@@ -9,7 +9,6 @@ Files dependencies:
 
 Files output:
 
-- data/dengue-populacao-mun.csv
 - data/dengue-populacao-mun.parquet
 
 """
@@ -105,10 +104,6 @@ def main():
         )
     )
 
-    dengue_populacao_mun.to_csv(
-        data_dir / "dengue-populacao-mun.csv",
-        index=False,
-    )
     dengue_populacao_mun.to_parquet(data_dir / "dengue-populacao-mun.parquet")
 
 
