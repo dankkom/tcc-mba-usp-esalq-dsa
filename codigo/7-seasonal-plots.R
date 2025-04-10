@@ -41,10 +41,11 @@ dados_br |>
   ggplot2::theme_minimal() +
   ggplot2::scale_y_continuous(labels = scales::comma)
 ggplot2::ggsave(
-  "output/plots/timeseries-plot.jpg",
+  "output/plots/timeseries-plot.png",
   width = 10,
   height = 5,
   dpi = 100,
+  bg = "white",
 )
 
 # Análise de sazonalidade
@@ -58,10 +59,11 @@ forecast::ggsubseriesplot(
   ggplot2::scale_y_continuous(labels = scales::number) +
   ggplot2::theme_minimal()
 ggplot2::ggsave(
-  "output/plots/seasonal-plot-subseries.jpg",
+  "output/plots/seasonal-plot-subseries.png",
   width = 10,
   height = 6,
   dpi = 100,
+  bg = "white",
 )
 
 
@@ -152,8 +154,9 @@ plot_original_e_ajustada +
   ggplot2::theme(legend.position = "bottom") +
   patchwork::plot_layout(ncol = 1, heights = c(2, 1, 1, 1))
 ggplot2::ggsave(
-  "output/plots/decomposition-plot.jpg",
+  "output/plots/decomposition-plot.png",
   width = 10,
   height = 10,
   dpi = 100,
+  bg = "white",
 )
