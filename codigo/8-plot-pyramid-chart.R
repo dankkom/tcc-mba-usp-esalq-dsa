@@ -181,10 +181,11 @@ plot_pyramid_chart <- function(dados) {
       widths = c(7.5, 0.75, 7.5)
     )
   ggplot2::ggsave(
-    "output/plots/pyramid-chart.jpg",
+    "output/plots/pyramid-chart.png",
     width = 12,
     height = 6,
     dpi = 300,
+    bg = "white",
   )
 }
 
@@ -299,10 +300,11 @@ plot_line_chart <- function(dados) {
       legend.text = element_text(size = 12),
     )
   ggsave(
-    "output/plots/pyramid-chart-line.jpg",
+    "output/plots/pyramid-chart-line.png",
     width = 12,
     height = 6,
     dpi = 300,
+    bg = "white",
   )
 }
 
