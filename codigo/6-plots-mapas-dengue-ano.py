@@ -95,7 +95,7 @@ def main():
         print("Plotando mapa points para o ano", ano)
         f, ax = plt.subplots()
         f.set_size_inches(12, 12)
-        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        br_uf.plot(ax=ax, facecolor="#f0f0f0", edgecolor="#ffffff", linewidth=2)
         dengue_populacao_br_mun.plot(
             markersize="incidencia",
             color="red",
@@ -145,7 +145,7 @@ def main():
             mincnt=1,
             reduce_C_function=np.mean,
         )
-        br_uf.plot(ax=ax, facecolor="none", edgecolor="#808080", linewidth=0.8)
+        br_uf.plot(ax=ax, facecolor="none", edgecolor="#f0f0f0", linewidth=0.8)
         ax.set_title(f"{ano}")
         ax.axis("off")
         plt.tight_layout()
@@ -167,7 +167,7 @@ def main():
             mincnt=1,
             reduce_C_function=np.mean,
         )
-        br_uf.plot(ax=ax, legend=True, facecolor="none", edgecolor="#808080", linewidth=0.8)
+        br_uf.plot(ax=ax, legend=True, facecolor="none", edgecolor="#f0f0f0", linewidth=0.8)
         ax.set_title(f"{ano}")
         ax.axis("off")
         plt.tight_layout()
@@ -189,7 +189,7 @@ def main():
         data = dengue_populacao_br_mun[dengue_populacao_br_mun["ano"] == ano]
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("bottom", size="5%", pad=0.1)
-        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        br_uf.plot(ax=ax, facecolor="#f0f0f0", edgecolor="#ffffff", linewidth=2)
         data.plot(
             column="incidencia",
             cmap="GnBu",
@@ -214,7 +214,7 @@ def main():
         data = dengue_populacao_br_mun[dengue_populacao_br_mun["ano"] == ano]
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("bottom", size="5%", pad=0.1)
-        br_uf.plot(ax=ax, facecolor="#e0e0e0", edgecolor="#ffffff", linewidth=2)
+        br_uf.plot(ax=ax, facecolor="#f0f0f0", edgecolor="#ffffff", linewidth=2)
         data.plot(
             column="pseudolog_incidencia",
             cmap="GnBu",
