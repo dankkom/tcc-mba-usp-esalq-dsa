@@ -65,14 +65,6 @@ incidencia_uf_2023_plot <- incidencia_uf %>%
   ) +
   # Remove legend
   ggplot2::theme(legend.position = "none")
-incidencia_uf_2023_plot
-ggplot2::ggsave(
-  "output/plots/incidencia-uf-2023.jpg",
-  incidencia_uf_2023_plot,
-  width = 6,
-  height = 8,
-  dpi = 100,
-)
 
 
 # Plot horizontal bar chart sorted by incidence, 2024
@@ -106,27 +98,6 @@ incidencia_uf_2024_plot <- incidencia_uf %>%
   ) +
   # Remove legend
   ggplot2::theme(legend.position = "none")
-incidencia_uf_2024_plot
-ggplot2::ggsave(
-  "output/plots/incidencia-uf-2023-2024.jpg",
-  incidencia_uf_2024_plot,
-  width = 6,
-  height = 8,
-  dpi = 100,
-)
-
-incidencia_uf_2023_2024_plot <- incidencia_uf_2023_plot + incidencia_uf_2024_plot +
-  patchwork::plot_layout(
-    ncol = 2
-  )
-ggplot2::ggsave(
-  "output/plots/incidencia-uf-2023-2024.jpg",
-  incidencia_uf_2023_2024_plot,
-  width = 12,
-  height = 8,
-  dpi = 100,
-)
-
 
 
 incidencia_uf_2023_2024_plot <-
@@ -136,9 +107,10 @@ incidencia_uf_2023_2024_plot <-
     ncol = 2
   )
 ggplot2::ggsave(
-  "output/plots/incidencia-uf-2023-2024.jpg",
+  "output/plots/incidencia-uf-2023-2024.png",
   incidencia_uf_2023_2024_plot,
   width = 12,
   height = 8,
   dpi = 100,
+  bg = "white"
 )
