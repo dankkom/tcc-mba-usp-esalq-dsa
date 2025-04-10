@@ -85,8 +85,9 @@ dengue_populacao_mun_2024 %>%
     legend.position = "none",
   )
 ggplot2::ggsave(
-  "output/plots/incidencia-regiao-boxplot.jpg",
+  "output/plots/incidencia-regiao-boxplot.png",
   width = 8,
   height = 6,
   dpi = 300,
+  bg = "white",
 )
