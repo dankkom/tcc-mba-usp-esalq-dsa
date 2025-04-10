@@ -2,7 +2,7 @@
 
 Files dependencies:
 
-- data/dengue-populacao-mun-ano.csv
+- data/dengue-populacao-mun.parquet
 - data/br_mun.gpkg
 - data/br_uf.json
 
@@ -54,9 +54,18 @@ def main():
     dest_plots_dir = Path("output/plots/dengue-ano")
     dest_plots_dir.mkdir(parents=True, exist_ok=True)
 
-    dengue_populacao_ano = pd.read_csv(
-        data_dir / "dengue-populacao-mun-ano.csv",
-        dtype={"id_municipio_6": str},
+    dengue_populacao_ano = (
+        pd.read_parquet(data_dir / "dengue-populacao-mun.parquet")
+        .assign(ano=lambda x: x["data"].dt.year)
+        .groupby(["ano", "sigla_uf", "id_municipio_6", "longitude", "latitude"])
+        .agg(
+            notificacoes=pd.NamedAgg(column="notificacoes", aggfunc="sum"),
+            populacao_estimada=pd.NamedAgg(column="populacao_estimada", aggfunc="mean"),
+        )
+        .assign(
+            incidencia=lambda x: x["notificacoes"] / x["populacao_estimada"] * 100_000
+        )
+        .reset_index()
     )
 
     # Dados geográficos dos municípios
