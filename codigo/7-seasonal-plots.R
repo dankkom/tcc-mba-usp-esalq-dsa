@@ -80,35 +80,25 @@ ts_data <- ts(
 ts_data
 
 # Decomposição da Série
-# Decomposição aditiva com método X-13
-ajuste <- seasonal::seas(ts_data)
+# Decomposição aditiva com decompose
+ajuste <- decompose(ts_data)
 summary(ajuste)
 plot(ajuste)
 
+# Data Frame com os dados de sazonalidade
 dados_br2 <- dados_br |>
   dplyr::mutate(
-    sazonal = seasonal::series(ajuste, "seats.seasonal"),
-    irregular = seasonal::series(ajuste, "seats.irregular"),
-    tendencia = seasonal::trend(ajuste),
-    ajustada = seasonal::final(ajuste)
+    sazonal = ajuste$seasonal,
+    irregular = ajuste$random,
+    tendencia = ajuste$trend,
   )
 
-
 # Gráfico das séries
-plot_original_e_ajustada <- dados_br2 |>
+plot_original <- dados_br2 |>
   ggplot2::ggplot(ggplot2::aes(anomes, notificacoes)) +
-  ggplot2::geom_line(ggplot2::aes(color = "Notificações"), linetype = "solid") +
-  ggplot2::geom_line(
-    ggplot2::aes(anomes, ajustada, color = "Ajustada"),
-    linetype = "dashed",
-  ) +
+  ggplot2::geom_line() +
   ggplot2::scale_y_continuous(labels = scales::number) +
-  # Put the legend at the top
   ggplot2::theme_minimal() +
-  ggplot2::theme(
-    legend.position = "top",
-    legend.title = ggplot2::element_blank(),
-  ) +
   ggplot2::labs(
     x = "Ano-Mês",
     y = "Notificações de Dengue",
@@ -146,7 +136,7 @@ plot_irregularidade <- dados_br2 |>
 
 
 # Plotar os gráficos numa única figura
-plot_original_e_ajustada +
+plot_original +
   plot_tendencia +
   plot_sazonalidade +
   plot_irregularidade +
