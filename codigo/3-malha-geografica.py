@@ -14,10 +14,7 @@ Output files:
 
 - data/br_mun.csv
 - data/br_mun.gpkg
-- data/br_regiao.json
 - data/br_uf.json
-- data/br_mesorregiao.json
-- data/br_microrregiao.json
 
 """
 
@@ -57,15 +54,6 @@ def load_br_mun():
     return br_mun
 
 
-def load_br_regiao():
-    br_regiao_filepath = Path("data", "br_regiao.json")
-    if not br_regiao_filepath.exists():
-        download_malha(br_regiao_filepath, "regiao")
-    br_regiao = gpd.GeoDataFrame.from_file(br_regiao_filepath).drop(columns=["id"])
-    br_regiao = br_regiao.rename(columns={"codarea": "id_regiao"})
-    return br_regiao
-
-
 def load_br_uf():
     br_uf_filepath = Path("data", "br_uf.json")
     if not br_uf_filepath.exists():
@@ -75,26 +63,30 @@ def load_br_uf():
     return br_uf
 
 
-def load_br_mesorregiao():
-    br_mesorregiao_filepath = Path("data", "br_mesorregiao.json")
-    if not br_mesorregiao_filepath.exists():
-        download_malha(br_mesorregiao_filepath, "mesorregiao")
-    br_mesorregiao = gpd.GeoDataFrame.from_file(br_mesorregiao_filepath).drop(
-        columns=["id"]
+def load_br_regiao_intermediaria():
+    br_regiao_intermediaria_filepath = Path("data", "br_regiao_intermediaria.json")
+    if not br_regiao_intermediaria_filepath.exists():
+        download_malha(br_regiao_intermediaria_filepath, "regiao_intermediaria")
+    br_regiao_intermediaria = gpd.GeoDataFrame.from_file(
+        br_regiao_intermediaria_filepath
+    ).drop(columns=["id"])
+    br_regiao_intermediaria = br_regiao_intermediaria.rename(
+        columns={"codarea": "id_regiao_intermediaria"}
     )
-    br_mesorregiao = br_mesorregiao.rename(columns={"codarea": "id_mesorregiao"})
-    return br_mesorregiao
+    return br_regiao_intermediaria
 
 
-def load_br_microrregiao():
-    br_microrregiao_filepath = Path("data", "br_microrregiao.json")
-    if not br_microrregiao_filepath.exists():
-        download_malha(br_microrregiao_filepath, "microrregiao")
-    br_microrregiao = gpd.GeoDataFrame.from_file(br_microrregiao_filepath).drop(
+def load_br_regiao_imediata():
+    br_regiao_imediata_filepath = Path("data", "br_regiao_imediata.json")
+    if not br_regiao_imediata_filepath.exists():
+        download_malha(br_regiao_imediata_filepath, "regiao-imediata")
+    br_regiao_imediata = gpd.GeoDataFrame.from_file(br_regiao_imediata_filepath).drop(
         columns=["id"]
     )
-    br_microrregiao = br_microrregiao.rename(columns={"codarea": "id_microrregiao"})
-    return br_microrregiao
+    br_regiao_imediata = br_regiao_imediata.rename(
+        columns={"codarea": "id_regiao_imediata"}
+    )
+    return br_regiao_imediata
 
 
 def main():
@@ -119,7 +111,23 @@ def main():
         ],
         dtype=str,
     )
-    br_mun = load_br_mun().merge(municipio, on="id_municipio")
+    br_mun = load_br_mun()
+    br_mun = br_mun.merge(municipio, on="id_municipio")
+    br_regiao_intermediaria = load_br_regiao_intermediaria()
+    br_regiao_intermediaria = br_regiao_intermediaria.assign(
+        longitude_regiao_intermediaria=br_regiao_intermediaria.geometry.centroid.x,
+        latitude_regiao_intermediaria=br_regiao_intermediaria.geometry.centroid.y,
+    ).drop(columns=["geometry"])
+    br_mun = br_mun.merge(
+        br_regiao_intermediaria, on="id_regiao_intermediaria", how="left"
+    )
+    br_regiao_imediata = load_br_regiao_imediata()
+    br_regiao_imediata = br_regiao_imediata.assign(
+        longitude_regiao_imediata=br_regiao_imediata.geometry.centroid.x,
+        latitude_regiao_imediata=br_regiao_imediata.geometry.centroid.y,
+    ).drop(columns=["geometry"])
+    br_mun = br_mun.merge(br_regiao_imediata, on="id_regiao_imediata", how="left")
+
     # Remove a columa geometry para não dar erro ao salvar em CSV
     br_mun.drop(columns=["geometry"]).to_csv(
         "data/br_mun.csv", decimal=",", index=False
@@ -127,10 +135,7 @@ def main():
     # salvando em gpkg
     br_mun.to_file("data/br_mun.gpkg", driver="GPKG")
 
-    load_br_regiao()
     load_br_uf()
-    load_br_mesorregiao()
-    load_br_microrregiao()
 
 
 if __name__ == "__main__":
