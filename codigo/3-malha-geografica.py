@@ -14,7 +14,6 @@ Output files:
 
 - data/br_mun.csv
 - data/br_mun.gpkg
-- data/br_uf.json
 
 """
 
@@ -133,9 +132,23 @@ def main():
         "data/br_mun.csv", decimal=",", index=False
     )
     # salvando em gpkg
-    br_mun.to_file("data/br_mun.gpkg", driver="GPKG")
+    br_mun.to_file(
+        "data/br_mun.gpkg",
+        driver="GPKG",
+        layer="br_mun",
+        mode="a",
+        overwrite=True,
+    )
 
-    load_br_uf()
+    br_uf = load_br_uf()
+
+    br_uf.to_file(
+        "data/br_mun.gpkg",
+        driver="GPKG",
+        layer="br_uf",
+        mode="a",
+        overwrite=True,
+    )
 
 
 if __name__ == "__main__":
