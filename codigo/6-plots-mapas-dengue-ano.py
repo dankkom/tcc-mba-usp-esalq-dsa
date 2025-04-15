@@ -4,7 +4,6 @@ Files dependencies:
 
 - data/dengue-populacao-mun.parquet
 - data/br_mun.gpkg
-- data/br_uf.json
 
 Output files:
 
@@ -70,14 +69,15 @@ def main():
 
     # Dados geográficos dos municípios
     br_mun_filepath = data_dir / "br_mun.gpkg"
-    br_mun = gpd.read_file(br_mun_filepath, columns=["id_municipio_6"])
+    br_mun = gpd.read_file(br_mun_filepath, layer="br_mun", columns=["id_municipio_6"])
 
     br_mun_p = br_mun.copy()
     br_mun_p.geometry = br_mun_p.centroid
 
     # Dados geográficos dos estados
-    br_uf_filepath = data_dir / "br_uf.json"
-    br_uf = gpd.GeoDataFrame.from_file(br_uf_filepath).drop(columns=["id"])
+    # br_uf_filepath = data_dir / "br_uf.json"
+    # br_uf = gpd.GeoDataFrame.from_file(br_uf_filepath).drop(columns=["id"])
+    br_uf = gpd.read_file(br_mun_filepath, layer="br_uf")
 
     # Plot
     plt.rcParams.update(
