@@ -4,7 +4,7 @@ This script loads and transforms the dengue, population and municipalities data.
 Files dependencies:
 
 - data/sinan-dengue.parquet
-- data/populacao-municipios.parquet
+- data/populacao-municipios.csv
 - data/br_mun.gpkg
 
 Files output:
@@ -52,7 +52,11 @@ def load_transform_dengue(data_dir: Path):
 def load_transform_populacao(data_dir: Path):
     # Dados População
     populacao = (
-        pd.read_parquet(data_dir / "populacao-municipios.parquet")
+        pd.read_csv(
+            data_dir / "populacao-municipios.csv",
+            dtype={"municipio_id": str},
+            parse_dates=["data"],
+        )
         .assign(
             data=lambda x: pd.to_datetime(x["data"]),
             id_municipio_6=lambda x: x["municipio_id"].str[:6],
@@ -66,7 +70,7 @@ def load_transform_populacao(data_dir: Path):
 def load_transform_br_mun(data_dir: Path):
     # Dados geográficos dos municípios
     br_mun_filepath = data_dir / "br_mun.gpkg"
-    br_mun = gpd.read_file(br_mun_filepath, columns=["id_municipio_6"])
+    br_mun = gpd.read_file(br_mun_filepath, layer="br_mun", columns=["id_municipio_6"])
     br_mun.geometry = br_mun.centroid
     br_mun["longitude"] = br_mun.geometry.x
     br_mun["latitude"] = br_mun.geometry.y
