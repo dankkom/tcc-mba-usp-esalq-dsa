@@ -13,7 +13,6 @@ Files dependencies:
 Output files:
 
 - data/populacao-municipios.csv
-- data/populacao-municipios.parquet
 
 """
 
@@ -99,7 +98,6 @@ def main():
         )
     )
     pop_mun_fcst.to_csv("data/populacao-municipios.csv", index=False)
-    pop_mun_fcst.to_parquet("data/populacao-municipios.parquet")
 
 
 if __name__ == "__main__":
