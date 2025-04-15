@@ -43,12 +43,10 @@ codigo/3-malha-geografica.py
 
 - data/br_mun.csv (PBI)
 - data/br_mun.gpkg
-- data/br_uf.json
 
 codigo/4-populacao.py
 
 - data/populacao-municipios.csv (PBI)
-- data/populacao-municipios.parquet
 
 codigo/5-dados-mapas.py
 
