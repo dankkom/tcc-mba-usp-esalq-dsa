@@ -67,6 +67,7 @@ def make_holt_forecast(series, horizon):
 def main():
     pop_mun = load_municipality_population()
     pop_mun_interp = interpolate_population(
+        # Ignore 2022 Census because the large discrepancy
         pop_mun.loc[pop_mun.index.year != 2022],
         method="akima",
     )
