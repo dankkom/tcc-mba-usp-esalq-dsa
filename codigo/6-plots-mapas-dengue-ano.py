@@ -112,7 +112,11 @@ def main():
             alpha=alpha,
             ax=ax,
         )
-        ax.set_title(f"{ano}")
+        if ano in (2023, 2024):
+            title = f"{'a' if ano == 2023 else 'b'}) {ano}"
+        else:
+            title = f"{ano}"
+        ax.set_title(title, loc="left", fontsize=22)
         # Legenda de bolhas
         # Adaptado de https://stackoverflow.com/a/73354795
         bins = np.array([10, 50, 100, 500])
